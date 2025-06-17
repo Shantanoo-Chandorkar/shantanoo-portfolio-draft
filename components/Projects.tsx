@@ -3,6 +3,7 @@
 import { motion, useMotionValue, useTransform, PanInfo } from 'framer-motion';
 import { useState } from 'react';
 import { ExternalLink, Github, X, ArrowLeft, ArrowRight } from 'lucide-react';
+import { FaGithub } from 'react-icons/fa';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -35,7 +36,7 @@ function ProjectCard({ project, index, totalCards, onDragEnd }: ProjectCardProps
   return (
     <motion.div
       key={project.id}
-      className="absolute inset-0"
+      className="absolute inset-0 sm:w-80 md:w-96 lg:w-96 xl:w-96 w-[18rem] h-auto mx-auto"
       style={{
         x,
         rotate,
@@ -153,15 +154,11 @@ function SwipeIndicators({ theme }: { theme: 'light' | 'dark' }) {
   const getIndicatorElements = () => {
     if (theme === 'light') {
       return {
-        left: '🌸',
-        right: '🦋',
         leftColor: '#f87171',
         rightColor: '#4ade80'
       };
     } else {
       return {
-        left: '⭐',
-        right: '🌙',
         leftColor: '#ef4444',
         rightColor: '#a855f7'
       };
@@ -171,20 +168,12 @@ function SwipeIndicators({ theme }: { theme: 'light' | 'dark' }) {
   const indicators = getIndicatorElements();
 
   return (
-    <div className="flex justify-between items-center w-full max-w-md mx-auto">
+    <div className="flex justify-evenly items-center w-full max-w-md mx-auto">
       <motion.div
         animate={{ x: [-10, 0, -10] }}
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         className="flex items-center gap-2"
       >
-        <motion.div
-          animate={{ rotate: [0, -15, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          className="text-2xl"
-          style={{ filter: `drop-shadow(0 0 8px ${indicators.leftColor})` }}
-        >
-          {indicators.left}
-        </motion.div>
         <ArrowLeft 
           className="w-5 h-5" 
           style={{ color: indicators.leftColor }}
@@ -212,14 +201,6 @@ function SwipeIndicators({ theme }: { theme: 'light' | 'dark' }) {
           className="w-5 h-5" 
           style={{ color: indicators.rightColor }}
         />
-        <motion.div
-          animate={{ rotate: [0, 15, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          className="text-2xl"
-          style={{ filter: `drop-shadow(0 0 8px ${indicators.rightColor})` }}
-        >
-          {indicators.right}
-        </motion.div>
       </motion.div>
     </div>
   );
@@ -429,7 +410,7 @@ export function Projects() {
                 <div className="flex gap-4">
                   <Button asChild className="bg-primary hover:bg-primary/90">
                     <a href={selectedProject.githubUrl} target="_blank" rel="noopener noreferrer">
-                      <Github className="w-4 h-4 mr-2" />
+                      <FaGithub className="w-4 h-4 mr-2" />
                       View Code
                     </a>
                   </Button>

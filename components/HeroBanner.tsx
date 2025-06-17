@@ -2,16 +2,21 @@
 
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Code, Mail, MapPin } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef  } from 'react';
+import { FaLinkedin, FaGithub, FaHackerrank } from 'react-icons/fa';
+import { SiLeetcode, SiGeeksforgeeks } from 'react-icons/si';
 
 export function HeroBanner() {
   const [currentIconIndex, setCurrentIconIndex] = useState(0);
-  
+  const imageRef = useRef<HTMLDivElement>(null);
+  const [radius, setRadius] = useState(200);
+
   const socialLinks = [
-    { icon: Github, href: 'https://github.com', label: 'GitHub', color: '#333' },
-    { icon: Code, href: 'https://leetcode.com', label: 'LeetCode', color: '#FFA116' },
-    { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn', color: '#0077B5' },
-    { icon: Mail, href: 'mailto:your@email.com', label: 'Email', color: '#EA4335' },
+    { icon: FaGithub, href: 'https://github.com', label: 'GitHub', color: '#333' },
+    { icon: SiLeetcode, href: 'https://leetcode.com', label: 'LeetCode', color: '#FFA116' },
+    { icon: FaLinkedin, href: 'https://linkedin.com', label: 'LinkedIn', color: '#0077B5' },
+    { icon: FaHackerrank, href: 'https://hackerrank.com', label: 'HackerRank', color: '#00EA64' },
+    { icon: SiGeeksforgeeks, href: 'https://geeksforgeeks.com', label: 'GeeksForGeeks', color: '#2C8E46' },
   ];
 
   useEffect(() => {
@@ -22,21 +27,38 @@ export function HeroBanner() {
     return () => clearInterval(interval);
   }, [socialLinks.length]);
 
-  const getIconPosition = (index: number, currentIndex: number) => {
-    const radius = 200; // Distance from center
+  const getIconPosition = (
+    index: number,
+    currentIndex: number,
+    radius: number
+  ) => {
     const totalIcons = socialLinks.length;
     const angleStep = (2 * Math.PI) / totalIcons;
-    
-    // Calculate the angle for this icon, with rotation based on current index
     const baseAngle = index * angleStep;
-    const rotationOffset = (currentIndex * angleStep);
-    const angle = baseAngle - rotationOffset - Math.PI / 2; // Start from top
-    
+    const rotationOffset = currentIndex * angleStep;
+    const angle = baseAngle - rotationOffset - Math.PI / 2;
+  
     const x = Math.cos(angle) * radius;
     const y = Math.sin(angle) * radius;
-    
+  
     return { x, y };
   };
+
+  useEffect(() => {
+    const updateRadius = () => {
+      if (imageRef.current) {
+        const size = imageRef.current.offsetWidth;
+        const iconSize = 48;
+        const offset = size * 0.06; // ~6% of the image size, adjust as needed
+        const safeRadius = (size - iconSize) / 2 + offset;
+        setRadius(safeRadius);
+      }
+    };
+  
+    updateRadius();
+    window.addEventListener('resize', updateRadius);
+    return () => window.removeEventListener('resize', updateRadius);
+  }, []);
 
   return (
     <section className="min-h-screen flex items-center justify-center px-4 py-16">
@@ -78,7 +100,10 @@ export function HeroBanner() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="flex justify-center"
         >
-          <div className="relative w-80 h-80 lg:w-96 lg:h-96">
+          <div 
+            ref={imageRef}
+            className="relative w-60 h-60 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96"
+          >
             {/* Profile Image */}
             <motion.div
               whileHover={{ scale: 1.05 }}
@@ -99,7 +124,7 @@ export function HeroBanner() {
             {/* Animated Social Icons */}
             <div className="absolute inset-0 flex items-center justify-center">
               {socialLinks.map((link, index) => {
-                const position = getIconPosition(index, currentIconIndex);
+                const position = getIconPosition(index, currentIconIndex, radius);
                 return (
                   <motion.a
                     key={link.label}
@@ -122,13 +147,13 @@ export function HeroBanner() {
                     whileTap={{ scale: 0.9 }}
                   >
                     <div 
-                      className="w-12 h-12 bg-card/80 backdrop-blur-sm border border-border rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300"
+                      className="w-10 h-10 sm:w-12 sm:h-12 bg-card/80 backdrop-blur-sm border border-border rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300"
                       style={{ 
                         boxShadow: `0 0 20px ${link.color}20`,
                       }}
                     >
                       <link.icon 
-                        className="w-6 h-6 text-foreground" 
+                        className="w-5 h-5 sm:w-6 sm:h-6 text-foreground" 
                         style={{ color: link.color }}
                       />
                     </div>
@@ -137,22 +162,6 @@ export function HeroBanner() {
               })}
             </div>
 
-            {/* Mobile Social Links (visible on small screens) */}
-            {/* <div className="lg:hidden absolute -bottom-16 left-1/2 transform -translate-x-1/2 flex gap-4">
-              {socialLinks.map((link, index) => (
-                <motion.a
-                  key={`mobile-${link.label}`}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-10 h-10 bg-card/80 backdrop-blur-sm border border-border rounded-full flex items-center justify-center shadow-lg"
-                >
-                  <link.icon className="w-5 h-5 text-foreground" />
-                </motion.a>
-              ))}
-            </div> */}
           </div>
         </motion.div>
       </div>
