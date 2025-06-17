@@ -36,7 +36,7 @@ function ProjectCard({ project, index, totalCards, onDragEnd }: ProjectCardProps
   return (
     <motion.div
       key={project.id}
-      className="absolute inset-0 sm:w-80 md:w-96 lg:w-96 xl:w-96 w-[18rem] h-auto mx-auto"
+      className="absolute inset-0 sm:w-[18rem] md:w-72 lg:w-80 xl:w-80 w-[18rem] h-auto mx-auto"
       style={{
         x,
         rotate,
@@ -281,12 +281,10 @@ export function Projects() {
       // Right swipe - open modal and show happy mascot
       setSelectedProject(project);
       setMascotEmotion('happy');
-      setTimeout(() => setMascotEmotion('neutral'), 2000);
     } else if (info.offset.x < -threshold) {
       // Left swipe - remove card and show sad mascot
       removeCard(project.id);
       setMascotEmotion('sad');
-      setTimeout(() => setMascotEmotion('neutral'), 2000);
     }
   };
 
