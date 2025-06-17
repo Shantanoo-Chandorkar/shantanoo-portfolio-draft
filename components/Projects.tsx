@@ -2,9 +2,10 @@
 
 import { motion, useMotionValue, useTransform, PanInfo } from 'framer-motion';
 import { useState } from 'react';
-import { ExternalLink, Github, X } from 'lucide-react';
+import { ExternalLink, Github, X, ArrowLeft, ArrowRight } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { useTheme } from '@/contexts/ThemeContext';
 import Image from 'next/image';
 
 interface Project {
@@ -85,7 +86,147 @@ function ProjectCard({ project, index, totalCards, onDragEnd }: ProjectCardProps
   );
 }
 
+function Mascot({ emotion }: { emotion: 'happy' | 'sad' | 'neutral' }) {
+  const { theme } = useTheme();
+  
+  const getMascotEmoji = () => {
+    switch (emotion) {
+      case 'happy': return '😊';
+      case 'sad': return '😢';
+      default: return '😐';
+    }
+  };
+
+  const getMascotColor = () => {
+    if (theme === 'light') {
+      switch (emotion) {
+        case 'happy': return '#4ade80';
+        case 'sad': return '#f87171';
+        default: return '#94a3b8';
+      }
+    } else {
+      switch (emotion) {
+        case 'happy': return '#a855f7';
+        case 'sad': return '#ef4444';
+        default: return '#64748b';
+      }
+    }
+  };
+
+  return (
+    <motion.div
+      key={emotion}
+      initial={{ scale: 0.8, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      exit={{ scale: 0.8, opacity: 0 }}
+      transition={{ duration: 0.3 }}
+      className="flex flex-col items-center"
+    >
+      <motion.div
+        animate={{ 
+          y: emotion === 'happy' ? [-5, 5, -5] : emotion === 'sad' ? [5, -5, 5] : [0],
+          rotate: emotion === 'happy' ? [-5, 5, -5] : [0]
+        }}
+        transition={{ 
+          duration: 2, 
+          repeat: Infinity, 
+          ease: "easeInOut" 
+        }}
+        className="text-6xl mb-2"
+        style={{ filter: `drop-shadow(0 0 10px ${getMascotColor()})` }}
+      >
+        {getMascotEmoji()}
+      </motion.div>
+      <motion.p 
+        className="text-sm text-muted-foreground text-center"
+        style={{ color: getMascotColor() }}
+      >
+        {emotion === 'happy' && "Great choice! 🎉"}
+        {emotion === 'sad' && "Aww, maybe next time! 💔"}
+        {emotion === 'neutral' && "Swipe to explore! ✨"}
+      </motion.p>
+    </motion.div>
+  );
+}
+
+function SwipeIndicators({ theme }: { theme: 'light' | 'dark' }) {
+  const getIndicatorElements = () => {
+    if (theme === 'light') {
+      return {
+        left: '🌸',
+        right: '🦋',
+        leftColor: '#f87171',
+        rightColor: '#4ade80'
+      };
+    } else {
+      return {
+        left: '⭐',
+        right: '🌙',
+        leftColor: '#ef4444',
+        rightColor: '#a855f7'
+      };
+    }
+  };
+
+  const indicators = getIndicatorElements();
+
+  return (
+    <div className="flex justify-between items-center w-full max-w-md mx-auto">
+      <motion.div
+        animate={{ x: [-10, 0, -10] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        className="flex items-center gap-2"
+      >
+        <motion.div
+          animate={{ rotate: [0, -15, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          className="text-2xl"
+          style={{ filter: `drop-shadow(0 0 8px ${indicators.leftColor})` }}
+        >
+          {indicators.left}
+        </motion.div>
+        <ArrowLeft 
+          className="w-5 h-5" 
+          style={{ color: indicators.leftColor }}
+        />
+        <span 
+          className="text-sm font-medium"
+          style={{ color: indicators.leftColor }}
+        >
+          Dismiss
+        </span>
+      </motion.div>
+
+      <motion.div
+        animate={{ x: [10, 0, 10] }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        className="flex items-center gap-2"
+      >
+        <span 
+          className="text-sm font-medium"
+          style={{ color: indicators.rightColor }}
+        >
+          View Details
+        </span>
+        <ArrowRight 
+          className="w-5 h-5" 
+          style={{ color: indicators.rightColor }}
+        />
+        <motion.div
+          animate={{ rotate: [0, 15, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          className="text-2xl"
+          style={{ filter: `drop-shadow(0 0 8px ${indicators.rightColor})` }}
+        >
+          {indicators.right}
+        </motion.div>
+      </motion.div>
+    </div>
+  );
+}
+
 export function Projects() {
+  const { theme } = useTheme();
   const projects: Project[] = [
     {
       id: 1,
@@ -135,9 +276,17 @@ export function Projects() {
 
   const [cards, setCards] = useState(projects);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [mascotEmotion, setMascotEmotion] = useState<'happy' | 'sad' | 'neutral'>('neutral');
 
   const removeCard = (id: number) => {
-    setCards(prev => prev.filter(card => card.id !== id));
+    setCards(prev => {
+      const filtered = prev.filter(card => card.id !== id);
+      // If no cards left, reset to full list
+      if (filtered.length === 0) {
+        return projects;
+      }
+      return filtered;
+    });
   };
 
   const handleDragEnd = (
@@ -148,16 +297,21 @@ export function Projects() {
     const threshold = 100;
     
     if (info.offset.x > threshold) {
-      // Right swipe - open modal
+      // Right swipe - open modal and show happy mascot
       setSelectedProject(project);
+      setMascotEmotion('happy');
+      setTimeout(() => setMascotEmotion('neutral'), 2000);
     } else if (info.offset.x < -threshold) {
-      // Left swipe - remove card
+      // Left swipe - remove card and show sad mascot
       removeCard(project.id);
+      setMascotEmotion('sad');
+      setTimeout(() => setMascotEmotion('neutral'), 2000);
     }
   };
 
   const resetCards = () => {
     setCards(projects);
+    setMascotEmotion('neutral');
   };
 
   return (
@@ -171,10 +325,16 @@ export function Projects() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl font-bold text-foreground mb-4">Projects</h2>
-          <p className="text-muted-foreground text-lg mb-8">Swipe right to view details, left to dismiss</p>
+          <p className="text-muted-foreground text-lg mb-8">Explore my work through interactive cards</p>
         </motion.div>
 
         <div className="flex flex-col items-center">
+          {/* Mascot */}
+          <div className="mb-8">
+            <Mascot emotion={mascotEmotion} />
+          </div>
+
+          {/* Project Cards */}
           <div className="relative w-80 h-96 mb-8">
             {cards.length === 0 ? (
               <div className="absolute inset-0 flex items-center justify-center">
@@ -198,16 +358,8 @@ export function Projects() {
             )}
           </div>
 
-          <div className="flex gap-4 text-muted-foreground text-sm">
-            <div className="flex items-center">
-              <span className="mr-2">👈</span>
-              <span>Swipe left to dismiss</span>
-            </div>
-            <div className="flex items-center">
-              <span className="mr-2">👉</span>
-              <span>Swipe right to view</span>
-            </div>
-          </div>
+          {/* Animated Swipe Indicators */}
+          <SwipeIndicators theme={theme} />
         </div>
 
         {/* Project Modal */}

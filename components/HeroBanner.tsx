@@ -2,15 +2,41 @@
 
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Code, Mail, MapPin } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { useState, useEffect } from 'react';
 
 export function HeroBanner() {
+  const [currentIconIndex, setCurrentIconIndex] = useState(0);
+  
   const socialLinks = [
-    { icon: Github, href: 'https://github.com', label: 'GitHub' },
-    { icon: Code, href: 'https://leetcode.com', label: 'LeetCode' },
-    { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
-    { icon: Mail, href: 'mailto:your@email.com', label: 'Email' },
+    { icon: Github, href: 'https://github.com', label: 'GitHub', color: '#333' },
+    { icon: Code, href: 'https://leetcode.com', label: 'LeetCode', color: '#FFA116' },
+    { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn', color: '#0077B5' },
+    { icon: Mail, href: 'mailto:your@email.com', label: 'Email', color: '#EA4335' },
   ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIconIndex((prev) => (prev + 1) % socialLinks.length);
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, [socialLinks.length]);
+
+  const getIconPosition = (index: number, currentIndex: number) => {
+    const radius = 200; // Distance from center
+    const totalIcons = socialLinks.length;
+    const angleStep = (2 * Math.PI) / totalIcons;
+    
+    // Calculate the angle for this icon, with rotation based on current index
+    const baseAngle = index * angleStep;
+    const rotationOffset = (currentIndex * angleStep);
+    const angle = baseAngle - rotationOffset - Math.PI / 2; // Start from top
+    
+    const x = Math.cos(angle) * radius;
+    const y = Math.sin(angle) * radius;
+    
+    return { x, y };
+  };
 
   return (
     <section className="min-h-screen flex items-center justify-center px-4 py-16">
@@ -44,33 +70,6 @@ export function HeroBanner() {
               Creating innovative solutions and beautiful user experiences.
             </p>
           </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="flex flex-wrap gap-4 justify-center lg:justify-start"
-          >
-            {socialLinks.map((link, index) => (
-              <motion.div
-                key={link.label}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="bg-card/50 border-border text-foreground hover:bg-accent/20 backdrop-blur-sm transition-all duration-300"
-                  asChild
-                >
-                  <a href={link.href} target="_blank" rel="noopener noreferrer">
-                    <link.icon className="w-5 h-5 mr-2" />
-                    {link.label}
-                  </a>
-                </Button>
-              </motion.div>
-            ))}
-          </motion.div>
         </motion.div>
 
         <motion.div
@@ -79,18 +78,81 @@ export function HeroBanner() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="flex justify-center"
         >
-          <div className="relative">
+          <div className="relative w-80 h-80 lg:w-96 lg:h-96">
+            {/* Profile Image */}
             <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-accent blur-xl opacity-30"
-            />
-            <motion.img
               whileHover={{ scale: 1.05 }}
-              src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=500"
-              alt="Profile"
-              className="w-80 h-80 rounded-full object-cover border-4 border-border backdrop-blur-sm relative z-10"
-            />
+              className="relative z-10 w-full h-full"
+            >
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-accent blur-xl opacity-30"
+              />
+              <img
+                src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=500"
+                alt="Profile"
+                className="w-full h-full rounded-full object-cover border-4 border-border backdrop-blur-sm relative z-10"
+              />
+            </motion.div>
+
+            {/* Animated Social Icons */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              {socialLinks.map((link, index) => {
+                const position = getIconPosition(index, currentIconIndex);
+                return (
+                  <motion.a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute z-20"
+                    animate={{
+                      x: position.x,
+                      y: position.y,
+                    }}
+                    transition={{
+                      duration: 2,
+                      ease: "easeInOut"
+                    }}
+                    whileHover={{ 
+                      scale: 1.2,
+                      transition: { duration: 0.2 }
+                    }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <div 
+                      className="w-12 h-12 bg-card/80 backdrop-blur-sm border border-border rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300"
+                      style={{ 
+                        boxShadow: `0 0 20px ${link.color}20`,
+                      }}
+                    >
+                      <link.icon 
+                        className="w-6 h-6 text-foreground" 
+                        style={{ color: link.color }}
+                      />
+                    </div>
+                  </motion.a>
+                );
+              })}
+            </div>
+
+            {/* Mobile Social Links (visible on small screens) */}
+            {/* <div className="lg:hidden absolute -bottom-16 left-1/2 transform -translate-x-1/2 flex gap-4">
+              {socialLinks.map((link, index) => (
+                <motion.a
+                  key={`mobile-${link.label}`}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="w-10 h-10 bg-card/80 backdrop-blur-sm border border-border rounded-full flex items-center justify-center shadow-lg"
+                >
+                  <link.icon className="w-5 h-5 text-foreground" />
+                </motion.a>
+              ))}
+            </div> */}
           </div>
         </motion.div>
       </div>
