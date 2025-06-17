@@ -1,13 +1,12 @@
-'use client';
-
+// src/components/Projects.tsx
 import { motion, useMotionValue, useTransform, PanInfo } from 'framer-motion';
 import { useState } from 'react';
-import { ExternalLink, Github, X, ArrowLeft, ArrowRight } from 'lucide-react';
+import { ExternalLink, X, ArrowLeft, ArrowRight } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/contexts/ThemeContext';
-import Image from 'next/image';
+import { MascotWithText } from './MascotCanvas';
 
 interface Project {
   id: number;
@@ -54,12 +53,10 @@ function ProjectCard({ project, index, totalCards, onDragEnd }: ProjectCardProps
       <Card className="w-full h-full bg-card/50 border-border backdrop-blur-sm cursor-grab active:cursor-grabbing">
         <CardContent className="p-0 h-full">
           <div className="h-48 overflow-hidden rounded-t-lg">
-            <Image
+            <img
               src={project.image}
               alt={project.title}
               className="w-full h-full object-cover"
-              width={600}
-              height={600}
             />
           </div>
           <div className="p-6">
@@ -83,69 +80,6 @@ function ProjectCard({ project, index, totalCards, onDragEnd }: ProjectCardProps
           </div>
         </CardContent>
       </Card>
-    </motion.div>
-  );
-}
-
-function Mascot({ emotion }: { emotion: 'happy' | 'sad' | 'neutral' }) {
-  const { theme } = useTheme();
-  
-  const getMascotEmoji = () => {
-    switch (emotion) {
-      case 'happy': return '😊';
-      case 'sad': return '😢';
-      default: return '😐';
-    }
-  };
-
-  const getMascotColor = () => {
-    if (theme === 'light') {
-      switch (emotion) {
-        case 'happy': return '#4ade80';
-        case 'sad': return '#f87171';
-        default: return '#94a3b8';
-      }
-    } else {
-      switch (emotion) {
-        case 'happy': return '#a855f7';
-        case 'sad': return '#ef4444';
-        default: return '#64748b';
-      }
-    }
-  };
-
-  return (
-    <motion.div
-      key={emotion}
-      initial={{ scale: 0.8, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      exit={{ scale: 0.8, opacity: 0 }}
-      transition={{ duration: 0.3 }}
-      className="flex flex-col items-center"
-    >
-      <motion.div
-        animate={{ 
-          y: emotion === 'happy' ? [-5, 5, -5] : emotion === 'sad' ? [5, -5, 5] : [0],
-          rotate: emotion === 'happy' ? [-5, 5, -5] : [0]
-        }}
-        transition={{ 
-          duration: 2, 
-          repeat: Infinity, 
-          ease: "easeInOut" 
-        }}
-        className="text-6xl mb-2"
-        style={{ filter: `drop-shadow(0 0 10px ${getMascotColor()})` }}
-      >
-        {getMascotEmoji()}
-      </motion.div>
-      <motion.p 
-        className="text-sm text-muted-foreground text-center"
-        style={{ color: getMascotColor() }}
-      >
-        {emotion === 'happy' && "Great choice! 🎉"}
-        {emotion === 'sad' && "Aww, maybe next time! 💔"}
-        {emotion === 'neutral' && "Swipe to explore! ✨"}
-      </motion.p>
     </motion.div>
   );
 }
@@ -308,9 +242,9 @@ export function Projects() {
         </motion.div>
 
         <div className="flex flex-col items-center">
-          {/* Mascot */}
+          {/* 3D Mascot */}
           <div className="mb-8">
-            <Mascot emotion={mascotEmotion} />
+            <MascotWithText emotion={mascotEmotion} theme={theme} />
           </div>
 
           {/* Project Cards */}
@@ -358,12 +292,10 @@ export function Projects() {
               onClick={e => e.stopPropagation()}
             >
               <div className="relative">
-                <Image
+                <img
                   src={selectedProject.image}
                   alt={selectedProject.title}
                   className="w-full h-64 object-cover rounded-t-lg"
-                  width={600}
-                  height={600}
                 />
                 <Button
                   variant="ghost"
