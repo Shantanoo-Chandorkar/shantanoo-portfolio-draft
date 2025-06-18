@@ -6,7 +6,7 @@ import { FaGithub } from 'react-icons/fa';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/contexts/ThemeContext';
-import { MascotWithText } from './MascotCanvas';
+import Image from 'next/image';
 
 interface Project {
   id: number;
@@ -25,9 +25,10 @@ interface ProjectCardProps {
   index: number;
   totalCards: number;
   onDragEnd: (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo, project: Project) => void;
+  onClick: (project: Project) => void; // NEW PROP
 }
 
-function ProjectCard({ project, index, totalCards, onDragEnd }: ProjectCardProps) {
+function ProjectCard({ project, index, totalCards, onDragEnd, onClick }: ProjectCardProps) {
   const x = useMotionValue(0);
   const rotate = useTransform(x, [-200, 200], [-25, 25]);
   const opacity = useTransform(x, [-200, -100, 0, 100, 200], [0, 1, 1, 1, 0]);
@@ -49,14 +50,17 @@ function ProjectCard({ project, index, totalCards, onDragEnd }: ProjectCardProps
       initial={{ scale: 0.9, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ duration: 1, delay: index * 0.2 }}
+      onClick={() => onClick(project)} // CLICK HANDLER HERE
     >
       <Card className="w-full h-full bg-card/50 border-border backdrop-blur-sm cursor-grab active:cursor-grabbing">
         <CardContent className="p-0 h-full">
           <div className="h-48 overflow-hidden rounded-t-lg">
-            <img
+            <Image
               src={project.image}
               alt={project.title}
               className="w-full h-full object-cover"
+              width={600}
+              height={500}
             />
           </div>
           <div className="p-6">
@@ -81,62 +85,6 @@ function ProjectCard({ project, index, totalCards, onDragEnd }: ProjectCardProps
         </CardContent>
       </Card>
     </motion.div>
-  );
-}
-
-function SwipeIndicators({ theme }: { theme: 'light' | 'dark' }) {
-  const getIndicatorElements = () => {
-    if (theme === 'light') {
-      return {
-        leftColor: '#f87171',
-        rightColor: '#4ade80'
-      };
-    } else {
-      return {
-        leftColor: '#ef4444',
-        rightColor: '#a855f7'
-      };
-    }
-  };
-
-  const indicators = getIndicatorElements();
-
-  return (
-    <div className="flex justify-evenly items-center w-full max-w-md mx-auto">
-      <motion.div
-        animate={{ x: [-10, 0, -10] }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        className="flex items-center gap-2"
-      >
-        <ArrowLeft 
-          className="w-5 h-5" 
-          style={{ color: indicators.leftColor }}
-        />
-        <span 
-          className="text-sm font-medium"
-          style={{ color: indicators.leftColor }}
-        >
-          Dismiss
-        </span>
-      </motion.div>
-
-      <motion.div
-        animate={{ x: [10, 0, 10] }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        className="flex items-center gap-2"
-      >
-        <span 
-          className="text-sm font-medium"
-          style={{ color: indicators.rightColor }}
-        >
-          View Details
-        </span>
-        <ArrowRight 
-          className="w-5 h-5" 
-          style={{ color: indicators.rightColor }}
-        />
-      </motion.div>
-    </div>
   );
 }
 
@@ -191,7 +139,6 @@ export function Projects() {
 
   const [cards, setCards] = useState(projects);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [mascotEmotion, setMascotEmotion] = useState<'happy' | 'sad' | 'neutral'>('neutral');
 
   const removeCard = (id: number) => {
     setCards(prev => {
@@ -212,19 +159,16 @@ export function Projects() {
     const threshold = 100;
     
     if (info.offset.x > threshold) {
-      // Right swipe - open modal and show happy mascot
+      // Right swipe - open modal
       setSelectedProject(project);
-      setMascotEmotion('happy');
     } else if (info.offset.x < -threshold) {
-      // Left swipe - remove card and show sad mascot
+      // Left swipe - remove card
       removeCard(project.id);
-      setMascotEmotion('sad');
     }
   };
 
   const resetCards = () => {
     setCards(projects);
-    setMascotEmotion('neutral');
   };
 
   return (
@@ -238,14 +182,10 @@ export function Projects() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl font-bold text-foreground mb-4">Projects</h2>
-          <p className="text-muted-foreground text-lg mb-8">Explore my work through interactive cards</p>
+          <p className="text-muted-foreground text-lg mb-8">{"Swipe left for next project | Swipe right to open."}</p>
         </motion.div>
 
         <div className="flex flex-col items-center">
-          {/* 3D Mascot */}
-          {/* <div className="mb-8">
-            <MascotWithText emotion={mascotEmotion} theme={theme} />
-          </div> */}
 
           {/* Project Cards */}
           <div className="relative w-80 h-96 mb-8">
@@ -266,13 +206,12 @@ export function Projects() {
                   index={index}
                   totalCards={cards.length}
                   onDragEnd={handleDragEnd}
+                  onClick={setSelectedProject}
                 />
               ))
             )}
           </div>
 
-          {/* Animated Swipe Indicators */}
-          <SwipeIndicators theme={theme} />
         </div>
 
         {/* Project Modal */}
@@ -292,10 +231,12 @@ export function Projects() {
               onClick={e => e.stopPropagation()}
             >
               <div className="relative">
-                <img
+                <Image
                   src={selectedProject.image}
                   alt={selectedProject.title}
                   className="w-full h-64 object-cover rounded-t-lg"
+                  width={600}
+                  height={500}
                 />
                 <Button
                   variant="ghost"
