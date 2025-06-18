@@ -65,7 +65,7 @@ export function About() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+          viewport={{ amount: 0.3 }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl font-bold text-foreground mb-4">About Me</h2>
@@ -75,8 +75,8 @@ export function About() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          viewport={{ amount: 0.3 }}
         >
           <Accordion type="single" collapsible className="space-y-4">
             {hobbies.map((hobby, index) => (
@@ -84,8 +84,8 @@ export function About() {
                 key={hobby.id}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.05 }}
+                viewport={{ amount: 0.3 }}
               >
                 <AccordionItem
                   value={hobby.id}
@@ -123,8 +123,8 @@ export function About() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          viewport={{ amount: 0.3 }}
           className="mt-12 text-center"
         >
           <div className="bg-card/50 border-border backdrop-blur-sm rounded-lg p-8">

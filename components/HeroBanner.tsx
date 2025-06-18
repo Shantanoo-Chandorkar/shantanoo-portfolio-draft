@@ -6,6 +6,9 @@ import { useState, useEffect, useRef  } from 'react';
 import { FaLinkedin, FaGithub, FaHackerrank } from 'react-icons/fa';
 import { SiLeetcode, SiGeeksforgeeks } from 'react-icons/si';
 
+const name = "John Doe";
+const title = "Software Developer";
+
 export function HeroBanner() {
   const [currentIconIndex, setCurrentIconIndex] = useState(0);
   const imageRef = useRef<HTMLDivElement>(null);
@@ -75,21 +78,65 @@ export function HeroBanner() {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="mb-6"
           >
-            <h1 className="text-5xl lg:text-7xl font-bold text-foreground mb-4">
-              <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                John Doe
-              </span>
-            </h1>
-            <h2 className="text-2xl lg:text-3xl text-primary font-light mb-2">
-              Software Developer
-            </h2>
-            <div className="flex items-center justify-center lg:justify-start text-muted-foreground mb-6">
-              <MapPin className="w-4 h-4 mr-2" />
-              <span>San Francisco, CA</span>
-            </div>
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={{
+                visible: {
+                  transition: {
+                    staggerChildren: 0.05,
+                  },
+                },
+              }}
+              className="mb-6"
+            >
+              {/* Animated Name */}
+              <h1 className="text-5xl lg:text-7xl font-bold text-foreground mb-4">
+                {name.split("").map((char, index) => (
+                  <motion.span
+                    key={index}
+                    variants={{
+                      hidden: { opacity: 0, y: 20 },
+                      visible: { opacity: 1, y: 0 },
+                    }}
+                    transition={{ duration: 0.4 }}
+                    className="inline-block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
+                  >
+                    {char === " " ? "\u00A0" : char}
+                  </motion.span>
+                ))}
+              </h1>
+              
+              {/* Animated Title */}
+              <h2 className="text-2xl lg:text-3xl text-primary font-light mb-2">
+                {title.split("").map((char, index) => (
+                  <motion.span
+                    key={index}
+                    variants={{
+                      hidden: { opacity: 0, y: 20 },
+                      visible: { opacity: 1, y: 0 },
+                    }}
+                    transition={{ duration: 0.4, delay: 0.3 }}
+                    className="inline-block"
+                  >
+                    {char === " " ? "\u00A0" : char}
+                  </motion.span>
+                ))}
+              </h2>
+              
+              {/* Location */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1, duration: 0.5 }}
+                className="flex items-center justify-center lg:justify-start text-muted-foreground mb-6"
+              >
+                <MapPin className="w-4 h-4 mr-2" />
+                <span>San Francisco, CA</span>
+              </motion.div>
+            </motion.div>
             <p className="text-lg text-muted-foreground leading-relaxed max-w-lg">
-              Passionate full-stack developer with expertise in modern web technologies. 
-              Creating innovative solutions and beautiful user experiences.
+              {"Passionate full-stack developer with expertise modern web technologies. Creating innovative solutions and beautiful user experiences."}
             </p>
           </motion.div>
         </motion.div>

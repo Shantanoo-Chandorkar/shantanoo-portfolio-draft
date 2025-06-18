@@ -19,7 +19,7 @@ export function DownloadCV() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+          viewport={{ amount: 0.3 }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl font-bold text-foreground mb-4">Download My CV</h2>
@@ -29,8 +29,8 @@ export function DownloadCV() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          viewport={{ amount: 0.3 }}
         >
           <Card className="bg-gradient-to-br from-primary/10 to-accent/10 border-primary/30 backdrop-blur-sm">
             <CardContent className="p-8">
@@ -40,7 +40,7 @@ export function DownloadCV() {
                     initial={{ scale: 0.8 }}
                     whileInView={{ scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.3 }}
-                    viewport={{ once: true }}
+                    viewport={{ amount: 0.3 }}
                     className="mb-6"
                   >
                     <div className="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto lg:mx-0 mb-4">
@@ -63,8 +63,8 @@ export function DownloadCV() {
                         key={index}
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
-                        viewport={{ once: true }}
+                        transition={{ duration: 0.4, delay: index * 0.05 }}
+                        viewport={{ amount: 0.3 }}
                         className="flex items-center justify-center lg:justify-start"
                       >
                         <highlight.icon className="w-5 h-5 text-primary mr-2" />
@@ -91,8 +91,8 @@ export function DownloadCV() {
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  viewport={{ amount: 0.3 }}
                   className="hidden lg:block"
                 >
                   <div className="relative">
@@ -141,8 +141,8 @@ export function DownloadCV() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ amount: 0.3 }}
           className="mt-8 text-center"
         >
           <p className="text-muted-foreground text-sm">

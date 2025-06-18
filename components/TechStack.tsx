@@ -30,7 +30,7 @@ function TechItem({ icon: Icon, title, description, delay = 0 }: TechItemProps) 
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay }}
-      viewport={{ once: true }}
+      viewport={{ amount: 0.3 }}
       whileHover={{ scale: 1.05 }}
     >
       <Card className="bg-card/50 border-border backdrop-blur-sm hover:bg-card/70 transition-all duration-300 h-full">
@@ -122,8 +122,8 @@ export function TechStack() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+          transition={{ duration: 0.3, delay: 0.1 }}
+          viewport={{ amount: 0.3 }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl font-bold text-foreground mb-4">Tech Stack</h2>
@@ -137,7 +137,7 @@ export function TechStack() {
               icon={tech.icon}
               title={tech.title}
               description={tech.description}
-              delay={index * 0.1}
+              delay={index * 0.05}
             />
           ))}
         </div>

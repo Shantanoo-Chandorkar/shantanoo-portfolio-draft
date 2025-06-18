@@ -48,7 +48,7 @@ function ProjectCard({ project, index, totalCards, onDragEnd }: ProjectCardProps
       whileHover={{ scale: 1.02 }}
       initial={{ scale: 0.9, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 1, delay: index * 0.2 }}
     >
       <Card className="w-full h-full bg-card/50 border-border backdrop-blur-sm cursor-grab active:cursor-grabbing">
         <CardContent className="p-0 h-full">
@@ -234,7 +234,7 @@ export function Projects() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+          viewport={{ amount: 0.3 }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl font-bold text-foreground mb-4">Projects</h2>
@@ -243,9 +243,9 @@ export function Projects() {
 
         <div className="flex flex-col items-center">
           {/* 3D Mascot */}
-          <div className="mb-8">
+          {/* <div className="mb-8">
             <MascotWithText emotion={mascotEmotion} theme={theme} />
-          </div>
+          </div> */}
 
           {/* Project Cards */}
           <div className="relative w-80 h-96 mb-8">

@@ -75,7 +75,7 @@ export function DecorativeElements() {
         ))}
 
         {/* Butterflies */}
-        {[...Array(4)].map((_, i) => (
+        {/* {[...Array(4)].map((_, i) => (
           <motion.div
             key={`butterfly-${i}`}
             className="absolute w-8 h-8 opacity-40"
@@ -96,7 +96,7 @@ export function DecorativeElements() {
           >
             🦋
           </motion.div>
-        ))}
+        ))} */}
 
         {/* Sun rays */}
         <motion.div

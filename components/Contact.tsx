@@ -111,8 +111,8 @@ export function Contact() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          viewport={{ amount: 0.3 }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl font-bold text-foreground mb-4">Get In Touch</h2>
@@ -125,7 +125,7 @@ export function Contact() {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
+            viewport={{ amount: 0.3 }}
           >
             <Card className="bg-card/50 border-border backdrop-blur-sm">
               <CardContent className="p-8">
@@ -245,8 +245,8 @@ export function Contact() {
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ amount: 0.3 }}
             className="space-y-8"
           >
             <div>

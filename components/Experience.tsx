@@ -60,7 +60,7 @@ export function Experience() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+          viewport={{ amount: 0.3 }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl font-bold text-foreground mb-4">Experience</h2>
@@ -86,8 +86,8 @@ export function Experience() {
               key={exp.id}
               initial={{ opacity: 0, x: exp.side === 'left' ? -100 : 100 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ amount: 0.3 }}
               className={`relative mb-16 ${
                 exp.side === 'left' 
                   ? 'md:pr-1/2 md:text-right' 
@@ -151,8 +151,8 @@ export function Experience() {
               key={exp.id}
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ amount: 0.3 }}
               className="relative mb-12"
             >
               <div className="absolute left-6 w-4 h-4 bg-primary rounded-full border-4 border-background" />
