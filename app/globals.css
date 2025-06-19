@@ -17,97 +17,94 @@
 }
 
 @layer base {
+  
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    --primary: 138 38% 27%;              /* #2d5d3a
+    --primary-foreground: 48 100% 91%;   /* #fff6d0 */
+    --secondary: 42 35% 74%;             /* #d2c4a4 */
+    --secondary-foreground: 137 35% 19%; /* #1f4027 */
+    --accent: 96 34% 45%;                /* #66994d */
+    --accent-foreground: 48 100% 91%;    /* #fff6d0 */
+    --background: 48 41% 92%;            /* #f1eede */
+    --foreground: 137 31% 22%;           /* #264d30 */
+    --card: 46 45% 86%;                  /* #ede5cf */
+    --card-foreground: 137 31% 22%;      /* #264d30 */
+    --border: 86 24% 70%;                /* #b0c1a1 */
+    --input: 86 24% 70%;                 /* #b0c1a1 */
+    --ring: 138 38% 27%;                 /* #2d5d3a */
+    --muted: 42 33% 88%;                 /* #e8e1d2 */
+    --muted-foreground: 135 20% 38%;     /* #4e7350 */
+
+    --chart-1: 24 85% 68%;               /* #f39c6b */
+    --chart-2: 180 46% 51%;              /* #4fb6b6 */
+    --chart-3: 200 31% 26%;              /* #2f4858 */
+    --chart-4: 43 89% 66%;               /* #f4c95d */
+    --chart-5: 28 87% 66%;               /* #f4a259 */
+
     --radius: 0.5rem;
   }
+
   .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --primary: 270 51% 67%;              /* #a780d9 */
+    --primary-foreground: 216 23% 92%;   /* #e8ecf1 */
+    --secondary: 266 22% 24%;            /* #3a314d */
+    --secondary-foreground: 216 23% 92%; /* #e8ecf1 */
+    --accent: 288 52% 59%;               /* #b35fcc */
+    --accent-foreground: 216 23% 92%;    /* #e8ecf1 */
+    --background: 234 15% 4%;            /* #0a0b11 */
+    --foreground: 216 23% 84%;           /* #d0d6df */
+    --card: 237 25% 10%;                 /* #12131d */
+    --card-foreground: 216 23% 84%;      /* #d0d6df */
+    --border: 231 16% 20%;               /* #2c2e3a */
+    --input: 231 16% 20%;                /* #2c2e3a */
+    --ring: 270 51% 67%;                 /* #a780d9 */
+    --muted: 240 14% 14%;                /* #1e1f27 */
+    --muted-foreground: 259 22% 66%;     /* #998eb6 */
+  
+    --chart-1: 222 100% 62%;             /* #407bff */
+    --chart-2: 160 57% 55%;              /* #4ad1a0 */
+    --chart-3: 30 85% 66%;               /* #f1a55c */
+    --chart-4: 270 100% 74%;             /* #c17dff */
+    --chart-5: 345 100% 70%;             /* #ff6680 */
   }
 }
 
-/* Light Theme - Nature Inspired */
-[data-theme="light"] {
-  --primary: 142 76% 36%;
-  --primary-foreground: 355 20% 98%;
-  --secondary: 60 4.8% 95.9%;
-  --secondary-foreground: 142 76% 36%;
-  --accent: 142 76% 36%;
-  --accent-foreground: 355 20% 98%;
-  --background: 120 20% 98%;
-  --foreground: 142 84% 12%;
-  --card: 0 0% 100%;
-  --card-foreground: 142 84% 12%;
-  --border: 142 30% 85%;
-  --input: 142 30% 85%;
-  --ring: 142 76% 36%;
-  --muted: 60 4.8% 95.9%;
-  --muted-foreground: 142 30% 45%;
+ /* Light Theme - Nature Inspired (Greens, Woods, Leaves) */
+ [data-theme="light"] {
+  --primary: #2d5d3a;              /* deep forest green */
+  --primary-foreground: #fff6d0;   /* soft leaf yellow */
+  --secondary: #d2c4a4;            /* soft wood beige */
+  --secondary-foreground: #1f4027;/* rich green bark */
+  --accent: #66994d;               /* lively leaf green */
+  --accent-foreground: #fff6d0;    /* light yellow-green */
+  --background: #f1eede;           /* soft earthy cream */
+  --foreground: #264d30;           /* natural deep green */
+  --card: #ede5cf;                 /* pale bark */
+  --card-foreground: #264d30;      /* dark leaf green */
+  --border: #b0c1a1;               /* mossy green */
+  --input: #b0c1a1;
+  --ring: #2d5d3a;                 /* deep green highlight */
+  --muted: #e8e1d2;                /* muted leaf brown */
+  --muted-foreground: #4e7350;     /* muted green text */
 }
 
-/* Dark Theme - Space Inspired */
+/* Dark Theme - Space Inspired (Black, Purples, Cosmic Accents) */
 [data-theme="dark"] {
-  --primary: 263 70% 50%;
-  --primary-foreground: 210 20% 98%;
-  --secondary: 215 27.9% 16.9%;
-  --secondary-foreground: 210 20% 98%;
-  --accent: 263 70% 50%;
-  --accent-foreground: 210 20% 98%;
-  --background: 224 71% 4%;
-  --foreground: 213 31% 91%;
-  --card: 224 71% 4%;
-  --card-foreground: 213 31% 91%;
-  --border: 215 27.9% 16.9%;
-  --input: 215 27.9% 16.9%;
-  --ring: 263 70% 50%;
-  --muted: 215 27.9% 16.9%;
-  --muted-foreground: 217.9 10.6% 64.9%;
+  --primary: #a780d9;              /* nebula violet */
+  --primary-foreground: #e8ecf1;   /* starlight white */
+  --secondary: #3a314d;            /* shadowy purple */
+  --secondary-foreground: #e8ecf1;
+  --accent: #b35fcc;               /* magenta nebula burst */
+  --accent-foreground: #e8ecf1;
+  --background: #0a0b11;           /* deep space black */
+  --foreground: #d0d6df;           /* star glow gray */
+  --card: #12131d;                 /* very dark purple */
+  --card-foreground: #d0d6df;
+  --border: #2c2e3a;               /* soft starlight border */
+  --input: #2c2e3a;
+  --ring: #a780d9;                 /* glowing purple ring */
+  --muted: #1e1f27;                /* cosmic dust gray */
+  --muted-foreground: #998eb6;     /* muted starlight */
 }
 
 @layer base {

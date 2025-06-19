@@ -67,20 +67,20 @@ export function Contact() {
     {
       icon: Mail,
       label: 'Email',
-      value: 'john@example.com',
-      href: 'mailto:john@example.com'
+      value: 'shantanoochandorkar@gmail.com',
+      href: 'mailto:shantanoochandorkar@gmail.com'
     },
     {
       icon: Phone,
       label: 'Phone',
-      value: '+1 (555) 123-4567',
-      href: 'tel:+15551234567'
+      value: '+91 9930725465',
+      href: 'tel:+919930725465'
     },
     {
       icon: MapPin,
       label: 'Location',
-      value: 'San Francisco, CA',
-      href: 'https://maps.google.com'
+      value: 'Mumbai, India',
+      href: undefined // No link for location
     }
   ];
 
@@ -88,25 +88,19 @@ export function Contact() {
     {
       icon: Github,
       label: 'GitHub',
-      href: 'https://github.com',
+      href: 'https://github.com/Shantanoo-Chandorkar',
       color: 'hover:text-gray-400'
     },
     {
       icon: Linkedin,
       label: 'LinkedIn',
-      href: 'https://linkedin.com',
+      href: 'https://linkedin.com/in/shantanoo-chandorkar',
       color: 'hover:text-blue-400'
-    },
-    {
-      icon: Twitter,
-      label: 'Twitter',
-      href: 'https://twitter.com',
-      color: 'hover:text-sky-400'
     }
   ];
 
   return (
-    <section className="py-20 px-4">
+    <section className="py-16 px-4">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -255,7 +249,7 @@ export function Contact() {
                 {contactInfo.map((item, index) => (
                   <motion.a
                     key={index}
-                    href={item.href}
+                    href={item?.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.02 }}

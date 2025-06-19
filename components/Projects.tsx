@@ -25,8 +25,44 @@ interface ProjectCardProps {
   index: number;
   totalCards: number;
   onDragEnd: (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo, project: Project) => void;
-  onClick: (project: Project) => void; // NEW PROP
+  onClick: (project: Project) => void;
 }
+
+const projects: Project[] = [
+  {
+    id: 1,
+    title: 'CineMix Platform',
+    description: 'A Full-Stack application for Movies and TV shows.',
+    longDescription: 'A Full-Stack application that leverages the IMDB API to provide users with searchable movie and TV show information, including details like ratings, cast, and plot summaries.',
+    technologies: ['React.js', 'Node.js', 'Express', 'MongoDB', 'Javascript', 'Tailwind CSS', 'IMDB API', 'Axios', 'Redux', 'JWT', 'Bcrypt', 'Mongoose'],
+    image: '/cinemix.png',
+    githubUrl: 'https://github.com/Shantanoo-Chandorkar/mern-movie-app',
+    liveUrl: 'https://cinemixmern.netlify.app/',
+    features: ['React Skeletons', 'Search Functionality', 'Movie Details', 'User Authentication', 'Responsive Design', 'Favorite Movies', 'Lazy Loading']
+  },
+  {
+    id: 2,
+    title: 'Habit Tracker',
+    description: 'Modern Habit Tracker with Analytics feature coming soon.',
+    longDescription: 'A robust habit tracking platform where users can authenticate, organize habits by category, and monitor their progress through detailed weekly, monthly, and yearly insights, with analytics coming soon.',
+    technologies: ['Next.js', 'MongoDB', 'App Router', 'JavaScript', 'Bcrypt'],
+    image: '/habit-tracker.png',
+    githubUrl: 'https://github.com/Shantanoo-Chandorkar/next-habit-tracker',
+    liveUrl: 'https://next-habit-tracker.vercel.app/',
+    features: ['User Authentication', 'Progress Tracking', 'Weekly Insights', 'Monthly Insights', 'Yearly Insights', 'Responsive Design', 'Analytics Coming Soon']
+  },
+  {
+    id: 3,
+    title: 'Porfolio Project',
+    description: 'Portfolio porject showcasing frontend skills with intuitive UI and animations',
+    longDescription: 'A portfolio project that highlights my frontend development skills, featuring an intuitive user interface, smooth animations, and responsive design. It serves as a showcase of my work and abilities in web development.',
+    technologies: ['Next.js', 'Tailwind CSS', 'Framer Motion', 'TypeScript', 'React'],
+    image: '/portfolio.png',
+    githubUrl: 'https://github.com/Shantanoo-Chandorkar/shantanoo-portfolio-draft',
+    liveUrl: '', // Replace with actual live URL if available
+    features: ['Responsive Design', 'Smooth Animations', 'Intuitive UI', 'Portfolio Showcase', 'Dark Mode', 'Light Mode']
+  },
+];
 
 function ProjectCard({ project, index, totalCards, onDragEnd, onClick }: ProjectCardProps) {
   const x = useMotionValue(0);
@@ -34,14 +70,69 @@ function ProjectCard({ project, index, totalCards, onDragEnd, onClick }: Project
   const opacity = useTransform(x, [-200, -100, 0, 100, 200], [0, 1, 1, 1, 0]);
 
   return (
+
+    /* Single Card Stack View */
+    // <motion.div
+    //   key={project.id}
+    //   className="absolute inset-0 sm:w-[18rem] md:w-72 lg:w-80 xl:w-80 w-[18rem] h-auto mx-auto"
+    //   style={{
+    //     x,
+    //     rotate,
+    //     opacity,
+    //     zIndex: totalCards - index
+    //   }}
+    //   drag="x"
+    //   dragConstraints={{ left: 0, right: 0 }}
+    //   onDragEnd={(event, info) => onDragEnd(event, info, project)}
+    //   whileHover={{ scale: 1.02 }}
+    //   initial={{ scale: 0.9, opacity: 0 }}
+    //   animate={{ scale: 1, opacity: 1 }}
+    //   transition={{ duration: 1, delay: index * 0.2 }}
+    //   onClick={() => onClick(project)} // CLICK HANDLER HERE
+    // >
+    //   <Card className="w-full h-full bg-card/50 border-border backdrop-blur-sm cursor-grab active:cursor-grabbing">
+    //     <CardContent className="p-0 h-full">
+    //       <div className="h-48 overflow-hidden rounded-t-lg">
+    //         <Image
+    //           src={project.image}
+    //           alt={project.title}
+    //           className="w-full h-full object-cover"
+    //           width={600}
+    //           height={500}
+    //         />
+    //       </div>
+    //       <div className="p-6">
+    //         <h3 className="text-xl font-bold text-foreground mb-2">{project.title}</h3>
+    //         <p className="text-muted-foreground text-sm mb-4">{project.description}</p>
+    //         <div className="flex flex-wrap gap-2">
+    //           {project.technologies.slice(0, 3).map((tech, i) => (
+    //             <span
+    //               key={i}
+    //               className="px-2 py-1 bg-primary/20 text-primary rounded text-xs border border-primary/30"
+    //             >
+    //               {tech}
+    //             </span>
+    //           ))}
+    //           {project.technologies.length > 3 && (
+    //             <span className="px-2 py-1 bg-primary/20 text-primary rounded text-xs border border-primary/30">
+    //               +{project.technologies.length - 3}
+    //             </span>
+    //           )}
+    //         </div>
+    //       </div>
+    //     </CardContent>
+    //   </Card>
+    // </motion.div>
+
+    /* Three card side-by-side view */
     <motion.div
       key={project.id}
-      className="absolute inset-0 sm:w-[18rem] md:w-72 lg:w-80 xl:w-80 w-[18rem] h-auto mx-auto"
+      className="relative sm:w-[18rem] md:w-72 lg:w-80 xl:w-80 w-[18rem] mx-auto mb-6"
       style={{
         x,
         rotate,
         opacity,
-        zIndex: totalCards - index
+        zIndex: totalCards - index,
       }}
       drag="x"
       dragConstraints={{ left: 0, right: 0 }}
@@ -50,10 +141,10 @@ function ProjectCard({ project, index, totalCards, onDragEnd, onClick }: Project
       initial={{ scale: 0.9, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ duration: 1, delay: index * 0.2 }}
-      onClick={() => onClick(project)} // CLICK HANDLER HERE
+      onClick={() => onClick(project)}
     >
       <Card className="w-full h-full bg-card/50 border-border backdrop-blur-sm cursor-grab active:cursor-grabbing">
-        <CardContent className="p-0 h-full">
+        <CardContent className="p-0 h-full flex flex-col">
           <div className="h-48 overflow-hidden rounded-t-lg">
             <Image
               src={project.image}
@@ -63,10 +154,13 @@ function ProjectCard({ project, index, totalCards, onDragEnd, onClick }: Project
               height={500}
             />
           </div>
-          <div className="p-6">
-            <h3 className="text-xl font-bold text-foreground mb-2">{project.title}</h3>
-            <p className="text-muted-foreground text-sm mb-4">{project.description}</p>
-            <div className="flex flex-wrap gap-2">
+          <div className="p-6 flex flex-col justify-between flex-grow">
+            <div>
+              <h3 className="text-xl font-bold text-foreground mb-2">{project.title}</h3>
+              <p className="text-muted-foreground text-sm mb-4 line-clamp-3">{project.description}</p>
+            </div>
+    
+            <div className="mt-2 flex flex-wrap gap-2">
               {project.technologies.slice(0, 3).map((tech, i) => (
                 <span
                   key={i}
@@ -90,52 +184,6 @@ function ProjectCard({ project, index, totalCards, onDragEnd, onClick }: Project
 
 export function Projects() {
   const { theme } = useTheme();
-  const projects: Project[] = [
-    {
-      id: 1,
-      title: 'E-Commerce Platform',
-      description: 'Full-stack e-commerce solution with modern UI/UX',
-      longDescription: 'A comprehensive e-commerce platform built with Next.js and Stripe integration. Features include user authentication, shopping cart, payment processing, order management, and admin dashboard.',
-      technologies: ['Next.js', 'TypeScript', 'Stripe', 'Prisma', 'PostgreSQL'],
-      image: 'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=600',
-      githubUrl: 'https://github.com',
-      liveUrl: 'https://example.com',
-      features: ['User Authentication', 'Payment Processing', 'Order Management', 'Admin Dashboard', 'Inventory Management']
-    },
-    {
-      id: 2,
-      title: 'Task Management App',
-      description: 'Collaborative project management tool with real-time updates',
-      longDescription: 'A real-time collaborative task management application with drag-and-drop functionality, team collaboration features, and progress tracking.',
-      technologies: ['React', 'Node.js', 'Socket.io', 'MongoDB', 'Express'],
-      image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=600',
-      githubUrl: 'https://github.com',
-      liveUrl: 'https://example.com',
-      features: ['Real-time Updates', 'Drag & Drop', 'Team Collaboration', 'Progress Tracking', 'File Sharing']
-    },
-    {
-      id: 3,
-      title: 'Weather Analytics Dashboard',
-      description: 'Interactive weather data visualization with forecasting',
-      longDescription: 'An advanced weather analytics dashboard featuring interactive charts, weather forecasting, historical data analysis, and location-based weather tracking.',
-      technologies: ['React', 'D3.js', 'Python', 'FastAPI', 'Redis'],
-      image: 'https://images.pexels.com/photos/1118873/pexels-photo-1118873.jpeg?auto=compress&cs=tinysrgb&w=600',
-      githubUrl: 'https://github.com',
-      liveUrl: 'https://example.com',
-      features: ['Interactive Charts', 'Weather Forecasting', 'Historical Analysis', 'Location Tracking', 'API Integration']
-    },
-    {
-      id: 4,
-      title: 'AI Content Generator',
-      description: 'AI-powered content creation tool with multiple formats',
-      longDescription: 'An AI-powered content generation platform that creates blog posts, social media content, and marketing copy using advanced language models.',
-      technologies: ['Next.js', 'OpenAI API', 'Supabase', 'Tailwind CSS'],
-      image: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=600',
-      githubUrl: 'https://github.com',
-      liveUrl: 'https://example.com',
-      features: ['AI Content Generation', 'Multiple Formats', 'Content Templates', 'Export Options', 'Usage Analytics']
-    }
-  ];
 
   const [cards, setCards] = useState(projects);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -172,7 +220,7 @@ export function Projects() {
   };
 
   return (
-    <section className="py-20 px-4">
+    <section className="py-16 px-4">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -188,7 +236,7 @@ export function Projects() {
         <div className="flex flex-col items-center">
 
           {/* Project Cards */}
-          <div className="relative w-80 h-96 mb-8">
+          <div className="flex flex-wrap justify-center gap-6 mb-8">
             {cards.length === 0 ? (
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center">
@@ -227,7 +275,8 @@ export function Projects() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-card rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-border"
+              // className="bg-card rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-border"
+              className="bg-card rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-border scrollbar-thin scrollbar-thumb-primary/30"
               onClick={e => e.stopPropagation()}
             >
               <div className="relative">

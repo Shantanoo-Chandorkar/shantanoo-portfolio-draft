@@ -1,25 +1,42 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { Github, Linkedin, Code, Mail, MapPin } from 'lucide-react';
+import { motion, useInView, AnimatePresence  } from 'framer-motion';
+import { MapPin } from 'lucide-react';
 import { useState, useEffect, useRef  } from 'react';
 import { FaLinkedin, FaGithub, FaHackerrank } from 'react-icons/fa';
 import { SiLeetcode, SiGeeksforgeeks } from 'react-icons/si';
 
-const name = "John Doe";
-const title = "Software Developer";
+const name = "Shantanoo Chandorkar";
+const nameWords = name.split(" ");  // ["Shantanoo", "Chandorkar"]
+const title = "Software";
+const words = ["Developer", "Engineer", "Designer", "Creator"];
 
 export function HeroBanner() {
   const [currentIconIndex, setCurrentIconIndex] = useState(0);
   const imageRef = useRef<HTMLDivElement>(null);
   const [radius, setRadius] = useState(200);
 
+  // Hooks for the animated name
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  // State for the animated title
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % words.length)
+    }, 5000)
+    // Clean up interval on unmount
+    return () => clearInterval(interval);
+  }, [])
+
   const socialLinks = [
-    { icon: FaGithub, href: 'https://github.com', label: 'GitHub', color: '#333' },
-    { icon: SiLeetcode, href: 'https://leetcode.com', label: 'LeetCode', color: '#FFA116' },
-    { icon: FaLinkedin, href: 'https://linkedin.com', label: 'LinkedIn', color: '#0077B5' },
-    { icon: FaHackerrank, href: 'https://hackerrank.com', label: 'HackerRank', color: '#00EA64' },
-    { icon: SiGeeksforgeeks, href: 'https://geeksforgeeks.com', label: 'GeeksForGeeks', color: '#2C8E46' },
+    { icon: FaGithub, href: 'https://github.com/Shantanoo-Chandorkar', label: 'GitHub', color: '#AAA' },
+    { icon: SiLeetcode, href: 'https://leetcode.com/u/Shantanoo-Chandorkar', label: 'LeetCode', color: '#FFA116' },
+    { icon: FaLinkedin, href: 'https://linkedin.com/in/shantanoo-chandorkar', label: 'LinkedIn', color: '#0077B5' },
+    { icon: FaHackerrank, href: 'https://hackerrank.com/profile/cshantanoo123', label: 'HackerRank', color: '#00EA64' },
+    { icon: SiGeeksforgeeks, href: 'https://geeksforgeeks.org/user/cshantanoo123', label: 'GeeksForGeeks', color: '#2C8E46' },
   ];
 
   useEffect(() => {
@@ -91,38 +108,54 @@ export function HeroBanner() {
               className="mb-6"
             >
               {/* Animated Name */}
-              <h1 className="text-5xl lg:text-7xl font-bold text-foreground mb-4">
-                {name.split("").map((char, index) => (
-                  <motion.span
-                    key={index}
-                    variants={{
-                      hidden: { opacity: 0, y: 20 },
-                      visible: { opacity: 1, y: 0 },
-                    }}
-                    transition={{ duration: 0.4 }}
-                    className="inline-block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
+              <h1
+                ref={ref}
+                // className="text-4xl lg:text-5xl font-bold text-foreground mb-4 flex justify-center items-center"
+                className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4 flex flex-wrap lg:flex-nowrap justify-center lg:justify-start items-center text-balance"
+              >
+                {nameWords.map((word, wIndex) => (
+                  <span
+                    key={wIndex}
+                    // className="inline-block whitespace-nowrap"
+                    className="inline-block whitespace-nowrap break-keep mr-2"
                   >
-                    {char === " " ? "\u00A0" : char}
-                  </motion.span>
+                    {word.split("").map((letter, lIndex) => (
+                      <motion.span
+                        key={lIndex}
+                        variants={{
+                          hidden: { opacity: 0, y: 20 },
+                          visible: { opacity: 1, y: 0 },
+                        }}
+                        animate={isInView ? { opacity: 1 } : {}}
+                        transition={{ duration: 0.4, delay: (wIndex * word.length + lIndex) * 0.03 }}
+                        className="inline-block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
+                      >
+                        {letter}
+                      </motion.span>
+                    ))}
+                    {/* add natural space after each word */}
+                    {wIndex < words.length - 1 && "\u00A0"}
+                  </span>
                 ))}
               </h1>
               
               {/* Animated Title */}
-              <h2 className="text-2xl lg:text-3xl text-primary font-light mb-2">
-                {title.split("").map((char, index) => (
-                  <motion.span
-                    key={index}
-                    variants={{
-                      hidden: { opacity: 0, y: 20 },
-                      visible: { opacity: 1, y: 0 },
-                    }}
-                    transition={{ duration: 0.4, delay: 0.3 }}
-                    className="inline-block"
+              {/* <div className="text-[2rem] text-center xs:text-center sm:text-center md:text-left lg:text-left xl:text-left sm:text-4xl font-bold md:text-[3rem] md:leading-[4rem] w-full gap-1.5 mb-4"> */}
+              <div className="text-2xl sm:text-3xl md:text-4xl font-bold leading-snug text-center md:text-center lg:text-left mb-4 whitespace-nowrap break-keep">
+                {title}{' '}
+                <AnimatePresence mode="wait">
+                  <motion.p
+                    key={words[index]}
+                    initial={{ opacity: 0, y: -40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 40 }}
+                    transition={{ duration: 0.2 }}
+                    className="inline-block break-keep"
                   >
-                    {char === " " ? "\u00A0" : char}
-                  </motion.span>
-                ))}
-              </h2>
+                    {words[index]}
+                  </motion.p>
+                </AnimatePresence>
+              </div>
               
               {/* Location */}
               <motion.div
@@ -132,11 +165,11 @@ export function HeroBanner() {
                 className="flex items-center justify-center lg:justify-start text-muted-foreground mb-6"
               >
                 <MapPin className="w-4 h-4 mr-2" />
-                <span>San Francisco, CA</span>
+                <span>Mumbai, India</span>
               </motion.div>
             </motion.div>
             <p className="text-lg text-muted-foreground leading-relaxed max-w-lg">
-              {"Passionate full-stack developer with expertise modern web technologies. Creating innovative solutions and beautiful user experiences."}
+              {"Passionate full-stack developer with expertise in modern web technologies. Creating innovative solutions and beautiful user experiences."}
             </p>
           </motion.div>
         </motion.div>

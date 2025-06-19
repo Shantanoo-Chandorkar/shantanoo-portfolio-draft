@@ -7,13 +7,13 @@ import { Card, CardContent } from '@/components/ui/card';
 
 export function DownloadCV() {
   const highlights = [
-    { icon: Star, text: '5+ Years Experience' },
+    { icon: Star, text: '2 Years Experience' },
     { icon: Award, text: 'Full Stack Developer' },
-    { icon: FileText, text: 'Multiple Projects' },
+    { icon: FileText, text: 'Eager Learner' },
   ];
 
   return (
-    <section className="py-20 px-4">
+    <section className="py-16 px-4">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -53,8 +53,7 @@ export function DownloadCV() {
                   </h3>
                   
                   <p className="text-muted-foreground mb-6 text-center lg:text-left">
-                    Download my complete CV to get detailed information about my professional experience, 
-                    technical skills, education, and achievements. Perfect for recruiters and hiring managers.
+                    {"Download my complete CV to get information about my professional experience, technical skills, education, and achievements. Let's connect and explore how I can contribute to your team!"}
                   </p>
 
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
@@ -78,13 +77,15 @@ export function DownloadCV() {
                     whileTap={{ scale: 0.95 }}
                     className="text-center lg:text-left"
                   >
-                    <Button
-                      size="lg"
-                      className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground px-8 py-3"
-                    >
-                      <Download className="w-5 h-5 mr-2" />
-                      Download CV (PDF)
-                    </Button>
+                    <a href="/Resume_Shantanoo-Chandorkar.pdf" download>
+                      <Button
+                        size="lg"
+                        className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground px-8 py-3"
+                      >
+                        <Download className="w-5 h-5 mr-2" />
+                        Download CV (PDF)
+                      </Button>
+                    </a>
                   </motion.div>
                 </div>
 
@@ -146,7 +147,7 @@ export function DownloadCV() {
           className="mt-8 text-center"
         >
           <p className="text-muted-foreground text-sm">
-            Last updated: December 2024 • Available in PDF format • 2 pages
+            Last updated: April 2025 • Available in PDF format • Single page
           </p>
         </motion.div>
       </div>

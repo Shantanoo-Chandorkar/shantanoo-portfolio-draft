@@ -5,15 +5,13 @@ import {
   Code, 
   Database, 
   Globe, 
-  Smartphone, 
-  Cloud, 
-  Cpu, 
   Layers, 
   Terminal,
   FileCode,
   Server,
-  Palette,
-  Zap
+  Zap,
+  Cpu,
+  Cog
 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -40,8 +38,10 @@ function TechItem({ icon: Icon, title, description, delay = 0 }: TechItemProps) 
             transition={{ duration: 0.6 }}
             className="inline-block mb-4"
           >
-            <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto">
-              <Icon className="w-8 h-8 text-primary-foreground" />
+            <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto"
+              style={{ backgroundColor: 'hsl(var(--accent))' }}
+            >
+              <Icon className="w-8 h-8" style={{ color: 'hsl(var(--accent-foreground))' }} />
             </div>
           </motion.div>
           <h3 className="text-lg font-semibold text-foreground mb-2">{title}</h3>
@@ -57,67 +57,57 @@ export function TechStack() {
     {
       icon: Code,
       title: 'Frontend Development',
-      description: 'React, Next.js, TypeScript, Tailwind CSS'
+      description: 'React, Next.js, TypeScript, Javascript, Tailwind CSS'
     },
     {
       icon: Server,
       title: 'Backend Development',
-      description: 'Node.js, Express, Python, FastAPI'
+      description: 'Node.js, Express, .NET Framework and Core, Firebase'
     },
     {
       icon: Database,
       title: 'Database Management',
-      description: 'PostgreSQL, MongoDB, Redis, Supabase'
+      description: 'MySQL, MongoDB, Microsoft SQL Server, PostgreSQL'
     },
     {
-      icon: Cloud,
-      title: 'Cloud & DevOps',
-      description: 'AWS, Docker, Kubernetes, CI/CD'
+      icon: Cpu,
+      title: 'Core Concepts',
+      description: 'Data Structures and Alogrithms, System Design, Secure API Design'
     },
     {
-      icon: Smartphone,
-      title: 'Mobile Development',
-      description: 'React Native, Flutter, Progressive Web Apps'
-    },
-    {
-      icon: Layers,
-      title: 'Architecture',
-      description: 'Microservices, System Design, API Design'
+      icon: Cog,
+      title: 'Testing',
+      description: 'Jest, Backstop.js, Selenium, Artillery'
     },
     {
       icon: Terminal,
       title: 'Development Tools',
-      description: 'Git, VS Code, Linux, Terminal'
+      description: 'VS Code, Linux, Postman, Docker, Burp Suite, Figma'
     },
     {
       icon: Zap,
       title: 'Performance',
-      description: 'Optimization, Caching, Load Testing'
-    },
-    {
-      icon: Palette,
-      title: 'UI/UX Design',
-      description: 'Figma, Design Systems, User Experience'
+      description: 'Web Vitals, SEO Optimization, Lighthouse, Accessibility'
     },
     {
       icon: Globe,
       title: 'Web Technologies',
-      description: 'WebSockets, GraphQL, REST APIs'
+      description: 'REST APIs, GraphQL, SOAP, Magento, WordPress, Shopify'
     },
     {
       icon: FileCode,
       title: 'Version Control',
-      description: 'Git, GitHub, GitLab, Collaborative Development'
+      description: 'Git, GitHub, GitLab, Bitbucket, SVN'
     },
     {
-      icon: Cpu,
-      title: 'Machine Learning',
-      description: 'TensorFlow, PyTorch, Data Analysis'
+      icon: Layers,
+      title: 'Programming Tools',
+      description: 'SonarQube, ESLint, Webpack, Babel, Grunt, PhpCodeSniffer'
     }
   ];
 
   return (
-    <section className="py-20 px-4">
+    <section className="py-16 px-4">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

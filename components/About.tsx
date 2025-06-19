@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
 import { 
   Accordion,
   AccordionContent,
@@ -16,50 +15,44 @@ export function About() {
       title: 'Anime & Manga',
       description: 'A passionate otaku who finds inspiration in Japanese animation and storytelling. Anime has taught me about different perspectives, creativity, and the power of compelling narratives.',
       items: [
+        'Monster - Complex characters and moral dilemmas',
+        'Steins;Gate - Time travel and intricate plots',
         'Attack on Titan - Epic storytelling and complex characters',
-        'Your Name - Beautiful animation and emotional depth',
-        'Demon Slayer - Stunning visuals and character development',
-        'One Piece - Adventure and friendship',
-        'Spirited Away - Miyazaki\'s masterpiece',
+        'Fullmetal Alchemist Brotherhood - Deep philosophical themes',
         'Death Note - Psychological thriller perfection',
-        'Fullmetal Alchemist - Deep philosophical themes',
-        'Naruto - Journey of growth and perseverance'
+        'Your Lie in April - Beautiful animation and emotional depth',
+        'Demon Slayer - Stunning visuals and character development',
       ]
     },
     {
       id: 'books',
       title: 'Books & Reading',
-      description: 'An avid reader who believes in the power of knowledge and storytelling. Books have shaped my thinking, expanded my horizons, and continue to inspire my problem-solving approach.',
+      description: 'An avid reader who believes in the power of knowledge and storytelling. Books have shaped my thinking, expanded my horizons, and continue to inspire me to be a better developer and person.',
       items: [
         'Clean Code by Robert C. Martin - Code craftsmanship',
-        'The Pragmatic Programmer - Software development wisdom',
-        'Atomic Habits by James Clear - Building better habits',
+        'You don\'t Know JS by Kyle Simpson - Deep dive into JavaScript',
         'Sapiens by Yuval Noah Harari - Human history insights',
-        'The Alchemist by Paulo Coelho - Following your dreams',
-        'Dune by Frank Herbert - Epic science fiction',
-        'The Psychology of Computer Programming - Understanding developers',
-        'Thinking, Fast and Slow - Cognitive psychology'
+        'Ikigai by Hector Garcia and Francesc Miralles - Finding purpose',
+        'And Then There Were None by Agatha Christie - Masterclass in mystery',
+        'The Silent Patient by Alex Michaelides - Psychological thriller',
+        'Mistborn by Brandon Sanderson - Epic fantasy world-building',
+        'The Count of Monte Cristo by Alexandre Dumas - Revenge and redemption',
       ]
     },
     {
       id: 'trekking',
       title: 'Trekking & Adventure',
-      description: 'Nature enthusiast who finds peace and challenge in the mountains. Trekking has taught me resilience, planning, and the importance of taking one step at a time - lessons that apply to coding too.',
+      description: 'Nature enthusiast who finds peace and challenge in the mountains. Trekking has taught me resilience, planning, and the importance of taking one step at a time - lessons that apply to life too.',
       items: [
-        'Himalayan Base Camp Trek - Nepal (14,000+ ft)',
-        'Inca Trail to Machu Picchu - Peru (13,800+ ft)',
-        'Mont Blanc Circuit - France/Italy/Switzerland',
-        'Torres del Paine - Patagonia, Chile',
-        'Annapurna Circuit - Nepal (17,769+ ft)',
-        'Kilimanjaro Summit - Tanzania (19,341+ ft)',
-        'Dolomites Alta Via - Northern Italy',
-        'Mount Whitney - California, USA (14,505+ ft)'
+        'Kalsubai Trek - Conquering the highest peak in Maharashtra',
+        'Gorakhgad Trek - Exploring ancient forts and lush greenery',
+        'Harishchandragad Trek - Majestic views and challenging trails',
       ]
     }
   ];
 
   return (
-    <section className="py-20 px-4">
+    <section className="py-16 px-4">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -108,7 +101,7 @@ export function About() {
                           transition={{ duration: 0.3, delay: i * 0.05 }}
                           className="flex items-start bg-card/30 rounded-lg p-3 border border-border/50"
                         >
-                          <span className="text-primary mr-3 mt-1 text-sm">•</span>
+                          <span className="text-primary mr-3 text-sm">•</span>
                           <span className="text-sm text-muted-foreground">{item}</span>
                         </motion.div>
                       ))}
