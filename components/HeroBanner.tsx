@@ -195,7 +195,7 @@ export function HeroBanner() {
                 className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-accent blur-xl opacity-30"
               />
               <img
-                src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=500"
+                src={"/banner-image.jpg"}
                 alt="Profile"
                 className="w-full h-full rounded-full object-cover border-4 border-border backdrop-blur-sm relative z-10"
               />

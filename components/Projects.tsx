@@ -57,7 +57,7 @@ const projects: Project[] = [
     description: 'Portfolio porject showcasing frontend skills with intuitive UI and animations',
     longDescription: 'A portfolio project that highlights my frontend development skills, featuring an intuitive user interface, smooth animations, and responsive design. It serves as a showcase of my work and abilities in web development.',
     technologies: ['Next.js', 'Tailwind CSS', 'Framer Motion', 'TypeScript', 'React'],
-    image: '/portfolio.png',
+    image: '/portfolio-1.png',
     githubUrl: 'https://github.com/Shantanoo-Chandorkar/shantanoo-portfolio-draft',
     liveUrl: '', // Replace with actual live URL if available
     features: ['Responsive Design', 'Smooth Animations', 'Intuitive UI', 'Portfolio Showcase', 'Dark Mode', 'Light Mode']
