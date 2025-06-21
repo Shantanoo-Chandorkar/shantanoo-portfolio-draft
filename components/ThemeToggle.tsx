@@ -13,7 +13,7 @@ export function ThemeToggle() {
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.3 }}
-      className="sticky top-6 left-6 z-50"
+      className="fixed top-6 left-6 z-50"
     >
       <Button
         onClick={toggleTheme}

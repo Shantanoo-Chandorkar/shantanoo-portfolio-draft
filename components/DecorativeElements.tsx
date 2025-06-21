@@ -23,7 +23,7 @@ export function DecorativeElements() {
     return (
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         {/* Floating leaves */}
-        {[...Array(8)].map((_, i) => (
+        {[...Array(5)].map((_, i) => (
           <motion.div
             key={`leaf-${i}`}
             className="absolute w-4 h-4 opacity-20"
@@ -49,7 +49,7 @@ export function DecorativeElements() {
         ))}
         
         {/* Floating flowers */}
-        {[...Array(6)].map((_, i) => (
+        {[...Array(3)].map((_, i) => (
           <motion.div
             key={`flower-${i}`}
             className="absolute w-6 h-6 opacity-30"
@@ -113,7 +113,7 @@ export function DecorativeElements() {
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden">
       {/* Twinkling stars */}
-      {[...Array(50)].map((_, i) => (
+      {[...Array(25)].map((_, i) => (
         <motion.div
           key={`star-${i}`}
           className="absolute w-1 h-1 bg-white rounded-full"

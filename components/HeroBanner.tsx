@@ -198,9 +198,8 @@ export function HeroBanner() {
               <Image
                 src={"/banner-image.jpg"}
                 alt="Profile"
-                sizes="(max-width: 768px) 100vw, 400px"
-                width={600}
-                height={600}
+                width={450}
+                height={450}
                 loading='lazy'
                 className="w-full h-full rounded-full object-cover border-4 border-border backdrop-blur-sm relative z-10"
               />
