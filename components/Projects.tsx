@@ -290,7 +290,7 @@ export function Projects() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="absolute top-4 right-4 bg-background/50 text-foreground hover:bg-background/70"
+                  className="fixed top-8 right-8 bg-background/50 text-foreground hover:bg-background/70"
                   onClick={() => setSelectedProject(null)}
                 >
                   <X className="w-4 h-4" />
@@ -327,17 +327,17 @@ export function Projects() {
                   </div>
                 </div>
                 
-                <div className="flex gap-4">
+                <div className="flex flex-row max-sm:flex-col sm:flex-row gap-4">
                   <Button asChild className="bg-primary hover:bg-primary/90">
                     <a href={selectedProject.githubUrl} target="_blank" rel="noopener noreferrer">
                       <FaGithub className="w-4 h-4 mr-2" />
-                      View Code
+                      <span className='text-xs'>View Code</span>
                     </a>
                   </Button>
                   <Button variant="outline" asChild className="border-primary text-primary hover:bg-primary/10">
                     <a href={selectedProject.liveUrl} target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="w-4 h-4 mr-2" />
-                      Live Demo
+                      <span className='text-xs'>Live Demo</span>
                     </a>
                   </Button>
                 </div>

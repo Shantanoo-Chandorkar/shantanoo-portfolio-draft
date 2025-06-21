@@ -136,3 +136,15 @@
     hsl(224, 71%, 4%) 100%);
   background-attachment: fixed;
 }
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden; /* Prevents scrollbars */
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden; /* Prevents scrollbars */
+}
