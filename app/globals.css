@@ -19,7 +19,7 @@
 @layer base {
   
   :root {
-    --primary: 138 38% 27%;              /* #2d5d3a
+    --primary: 138 38% 27%;              /* #2d5d3a */
     --primary-foreground: 48 100% 91%;   /* #fff6d0 */
     --secondary: 42 35% 74%;             /* #d2c4a4 */
     --secondary-foreground: 137 35% 19%; /* #1f4027 */
@@ -33,7 +33,7 @@
     --input: 86 24% 70%;                 /* #b0c1a1 */
     --ring: 138 38% 27%;                 /* #2d5d3a */
     --muted: 42 33% 88%;                 /* #e8e1d2 */
-    --muted-foreground: 135 20% 38%;     /* #4e7350 */
+    --muted-foreground: 135 25% 30%;     /* #3c5c3e - Adjusted for better contrast */
 
     --chart-1: 24 85% 68%;               /* #f39c6b */
     --chart-2: 180 46% 51%;              /* #4fb6b6 */
@@ -85,7 +85,7 @@
   --input: #b0c1a1;
   --ring: #2d5d3a;                 /* deep green highlight */
   --muted: #e8e1d2;                /* muted leaf brown */
-  --muted-foreground: #4e7350;     /* muted green text */
+  --muted-foreground: #3c5c3e;     /* Adjusted for better contrast - Darker green text */
 }
 
 /* Dark Theme - Space Inspired (Black, Purples, Cosmic Accents) */

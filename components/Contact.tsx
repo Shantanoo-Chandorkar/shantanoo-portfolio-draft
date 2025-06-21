@@ -79,7 +79,7 @@ export function Contact() {
       icon: MapPin,
       label: 'Location',
       value: 'Mumbai, India',
-      href: undefined // No link for location
+      href: `https://www.google.com/maps/search/?api=1&query=Mumbai,+India`
     }
   ];
 
@@ -279,6 +279,7 @@ export function Contact() {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
+                    aria-label={`Visit Shantanoo Chandorkar's ${social.label} Profile`}
                     className={`w-12 h-12 bg-card/50 border border-border rounded-full flex items-center justify-center text-muted-foreground hover:bg-card/70 transition-all duration-300 ${social.color}`}
                   >
                     <social.icon className="w-5 h-5" />

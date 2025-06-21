@@ -198,8 +198,9 @@ export function HeroBanner() {
               <Image
                 src={"/banner-image.jpg"}
                 alt="Profile"
-                fill
                 sizes="(max-width: 768px) 100vw, 400px"
+                width={600}
+                height={600}
                 loading='lazy'
                 className="w-full h-full rounded-full object-cover border-4 border-border backdrop-blur-sm relative z-10"
               />
@@ -213,6 +214,7 @@ export function HeroBanner() {
                   <motion.a
                     key={link.label}
                     href={link.href}
+                    aria-label={`Visit Shantanoo Chandorkar's ${link.label} Profile`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="absolute z-20"

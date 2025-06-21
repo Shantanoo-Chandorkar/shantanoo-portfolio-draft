@@ -54,7 +54,7 @@ const projects: Project[] = [
   {
     id: 3,
     title: 'Porfolio Project',
-    description: 'Portfolio porject showcasing frontend skills with intuitive UI and animations',
+    description: 'Portfolio project showcasing frontend skills with intuitive UI and animations',
     longDescription: 'A portfolio project that highlights my frontend development skills, featuring an intuitive user interface, smooth animations, and responsive design. It serves as a showcase of my work and abilities in web development.',
     technologies: ['Next.js', 'Tailwind CSS', 'Framer Motion', 'TypeScript', 'React'],
     image: '/portfolio-1.png',
