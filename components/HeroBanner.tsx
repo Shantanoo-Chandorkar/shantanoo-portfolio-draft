@@ -5,6 +5,7 @@ import { MapPin } from 'lucide-react';
 import { useState, useEffect, useRef  } from 'react';
 import { FaLinkedin, FaGithub, FaHackerrank } from 'react-icons/fa';
 import { SiLeetcode, SiGeeksforgeeks } from 'react-icons/si';
+import Image from 'next/image';
 
 const name = "Shantanoo Chandorkar";
 const nameWords = name.split(" ");  // ["Shantanoo", "Chandorkar"]
@@ -194,9 +195,12 @@ export function HeroBanner() {
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
                 className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-accent blur-xl opacity-30"
               />
-              <img
+              <Image
                 src={"/banner-image.jpg"}
                 alt="Profile"
+                fill
+                sizes="(max-width: 768px) 100vw, 400px"
+                loading='lazy'
                 className="w-full h-full rounded-full object-cover border-4 border-border backdrop-blur-sm relative z-10"
               />
             </motion.div>
