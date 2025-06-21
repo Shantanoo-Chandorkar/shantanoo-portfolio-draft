@@ -13,6 +13,7 @@ import {
   Cpu,
   Cog
 } from 'lucide-react';
+import { FaWordpressSimple } from "react-icons/fa";
 import { Card, CardContent } from '@/components/ui/card';
 
 interface TechItemProps {
@@ -103,6 +104,11 @@ export function TechStack() {
       icon: Layers,
       title: 'Programming Tools',
       description: 'SonarQube, ESLint, Webpack, Babel, Grunt, PhpCodeSniffer'
+    },
+    {
+      icon: FaWordpressSimple,
+      title: 'WordPress Plugins',
+      description: 'Elementor, WooCommerce, WordFence, WPForms, Yoast SEO, Advanced Custom Fields'
     }
   ];
 
