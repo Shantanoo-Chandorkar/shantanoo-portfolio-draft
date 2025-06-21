@@ -144,9 +144,14 @@ export function DecorativeElements() {
             y: Math.random() * (screenSize.height / 2),
             opacity: 0
           }}
+          // animate={{
+          //   x: Math.random() * screenSize.width + 200,
+          //   y: Math.random() * (screenSize.height / 2) + 200,
+          //   opacity: [0, 1, 0]
+          // }}
           animate={{
-            x: Math.random() * screenSize.width + 200,
-            y: Math.random() * (screenSize.height / 2) + 200,
+            x: Math.min(Math.random() * screenSize.width, screenSize.width - 100),
+            y: Math.min(Math.random() * (screenSize.height / 2), screenSize.height - 100),
             opacity: [0, 1, 0]
           }}
           transition={{

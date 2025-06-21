@@ -260,7 +260,7 @@ export function Contact() {
                     </div>
                     <div>
                       <p className="text-muted-foreground text-sm">{item.label}</p>
-                      <p className="text-foreground font-medium group-hover:text-primary transition-colors">
+                      <p className="text-foreground text-xs font-medium group-hover:text-primary transition-colors">
                         {item.value}
                       </p>
                     </div>
