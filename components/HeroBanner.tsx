@@ -168,7 +168,7 @@ export function HeroBanner() {
                 <span>Mumbai, India</span>
               </motion.div>
             </motion.div>
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-lg">
+            <p className="text-lg text-muted-foreground leading-relaxed max-w-lg font-bold">
               {"Passionate full-stack developer with expertise in modern web technologies. Creating innovative solutions and beautiful user experiences."}
             </p>
           </motion.div>
