@@ -8,8 +8,8 @@ import { Card, CardContent } from '@/components/ui/card';
 export function DownloadCV() {
   const highlights = [
     { icon: Star, text: '2 Years Experience' },
-    { icon: Award, text: 'Full Stack Developer' },
-    { icon: FileText, text: 'Eager Learner' },
+    { icon: Award, text: 'MERN Stack Developer' },
+    { icon: FileText, text: 'WordPress, Magento, Shopify' },
   ];
 
   return (
@@ -67,7 +67,7 @@ export function DownloadCV() {
                         className="flex items-center justify-center lg:justify-start"
                       >
                         <highlight.icon className="w-5 h-5 text-primary mr-2" />
-                        <span className="text-muted-foreground text-sm">{highlight.text}</span>
+                        <span className="text-muted-foreground text-[0.75rem]">{highlight.text}</span>
                       </motion.div>
                     ))}
                   </div>
