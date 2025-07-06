@@ -9,7 +9,7 @@ const experiences = [
     id: 1,
     company: 'Hummingbird Web Solutions Pvt Ltd.',
     position: 'Software Developer',
-    period: 'Oct 2024 - Present',
+    // period: 'Oct 2024 - Present',
     location: 'Pune, India',
     description: [
       'Took ownership of revamping 50+ React based Gutenberg components, enhancing accessibility and UX for 4,000+ users',
@@ -27,7 +27,7 @@ const experiences = [
     id: 2,
     company: 'Hummingbird Web Solutions Pvt Ltd.',
     position: 'Software Developer',
-    period: 'April 2024 - Oct 2024',
+    // period: 'April 2024 - Oct 2024',
     location: 'Pune, India',
     description: [
       'Learned Magento 2.0 to facilitate the e-commerce projects and contributed to the development of a custom Magento module for a client, improving their online store functionality.',
@@ -42,7 +42,7 @@ const experiences = [
     id: 3,
     company: 'Hummingbird Web Solutions Pvt Ltd.',
     position: 'Software Developer Trainee',
-    period: 'Dec 2023 - March 2024',
+    // period: 'Dec 2023 - March 2024',
     location: 'Pune, India',
     description: [
       'Built a high-performance Windows application to automate JSON-to-PDF conversion using C# and .NET with efficient SQL queries, enabling 20% faster internal workflows.',
@@ -108,10 +108,10 @@ export function Experience() {
                         <span className="font-semibold">{exp.company}</span>
                       </div>
                       <div className="flex flex-col text-muted-foreground text-sm">
-                        <div className="flex items-center mb-1">
+                        {/* <div className="flex items-center mb-1">
                           <Calendar className="w-4 h-4 mr-2" />
                           <span>{exp.period}</span>
-                        </div>
+                        </div> */}
                         <div className="flex items-center">
                           <MapPin className="w-4 h-4 mr-2" />
                           <span>{exp.location}</span>
@@ -169,10 +169,10 @@ export function Experience() {
                       <span className="font-semibold">{exp.company}</span>
                     </div>
                     <div className="flex flex-col text-muted-foreground text-sm">
-                      <div className="flex items-center mb-1">
+                      {/* <div className="flex items-center mb-1">
                         <Calendar className="w-4 h-4 mr-2" />
                         <span>{exp.period}</span>
-                      </div>
+                      </div> */}
                       <div className="flex items-center">
                         <MapPin className="w-4 h-4 mr-2" />
                         <span>{exp.location}</span>
