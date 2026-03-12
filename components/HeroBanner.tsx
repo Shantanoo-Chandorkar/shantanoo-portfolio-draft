@@ -72,7 +72,7 @@ export function HeroBanner() {
   }, []);
 
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 py-16">
+    <section className="min-h-screen flex items-center justify-center px-4 pt-20 sm:py-16">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <motion.div
           initial={{ opacity: 0, x: -50 }}

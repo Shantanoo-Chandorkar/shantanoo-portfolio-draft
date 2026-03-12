@@ -33,7 +33,7 @@ export function CinematicHero() {
   };
 
   return (
-    <section id="hero" className="min-h-screen flex flex-col items-center justify-center px-4 py-16 relative">
+    <section id="hero" className="min-h-screen flex flex-col items-center justify-center px-4 py-20 relative">
       <div className="max-w-3xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
