@@ -20,6 +20,8 @@ import { StickyNavbar } from '@/components/cinematic/StickyNavbar';
 import { CinematicExperience } from '@/components/cinematic/CinematicExperience';
 import { CinematicProjects } from '@/components/cinematic/CinematicProjects';
 import { CinematicTechStack } from '@/components/cinematic/CinematicTechStack';
+import { CinematicContact } from '@/components/cinematic/CinematicContact';
+import { FloatingCVButton } from '@/components/cinematic/FloatingCVButton';
 
 function ClassicView() {
   return (
@@ -51,6 +53,8 @@ function CinematicView() {
       <CinematicExperience />
       <CinematicProjects />
       <CinematicTechStack />
+      <CinematicContact />
+      <FloatingCVButton />
     </motion.div>
   );
 }
