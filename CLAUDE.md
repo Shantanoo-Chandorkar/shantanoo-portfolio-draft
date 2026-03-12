@@ -1,6 +1,6 @@
 # Shantanoo Portfolio
 
-Personal portfolio website built with Next.js, Three.js, and Tailwind CSS.
+Personal portfolio website built with Next.js and Tailwind CSS.
 
 ## Tech Stack
 

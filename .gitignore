@@ -37,6 +37,7 @@ next-env.d.ts
 
 # claude code local settings
 .claude/
+.superpowers
 
 # lock files
 package-lock.json
