@@ -16,6 +16,7 @@ import { DecorativeElements } from '@/components/DecorativeElements';
 import { LandingChoice } from '@/components/LandingChoice';
 import { DesignToggle } from '@/components/DesignToggle';
 import { CinematicHero } from '@/components/cinematic/CinematicHero';
+import { StickyNavbar } from '@/components/cinematic/StickyNavbar';
 
 function ClassicView() {
   return (
@@ -43,6 +44,7 @@ function CinematicView() {
       transition={{ duration: 0.5 }}
     >
       <CinematicHero />
+      <StickyNavbar />
     </motion.div>
   );
 }
