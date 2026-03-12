@@ -17,6 +17,9 @@ import { LandingChoice } from '@/components/LandingChoice';
 import { DesignToggle } from '@/components/DesignToggle';
 import { CinematicHero } from '@/components/cinematic/CinematicHero';
 import { StickyNavbar } from '@/components/cinematic/StickyNavbar';
+import { CinematicExperience } from '@/components/cinematic/CinematicExperience';
+import { CinematicProjects } from '@/components/cinematic/CinematicProjects';
+import { CinematicTechStack } from '@/components/cinematic/CinematicTechStack';
 
 function ClassicView() {
   return (
@@ -45,6 +48,9 @@ function CinematicView() {
     >
       <CinematicHero />
       <StickyNavbar />
+      <CinematicExperience />
+      <CinematicProjects />
+      <CinematicTechStack />
     </motion.div>
   );
 }
