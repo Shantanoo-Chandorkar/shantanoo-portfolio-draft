@@ -1,11 +1,10 @@
 'use client';
 
-import { motion, useInView, AnimatePresence  } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { MapPin } from 'lucide-react';
-import { useState, useEffect, useRef  } from 'react';
-import { FaLinkedin, FaGithub, FaHackerrank } from 'react-icons/fa';
-import { SiLeetcode, SiGeeksforgeeks } from 'react-icons/si';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import { heroSocialLinks } from '@/lib/social-links';
 
 const name = "Shantanoo Chandorkar";
 const nameWords = name.split(" ");  // ["Shantanoo", "Chandorkar"]
@@ -22,38 +21,29 @@ export function HeroBanner() {
   const isInView = useInView(ref, { once: true });
 
   // State for the animated title
-  const [index, setIndex] = useState(0);
+  const [wordIndex, setWordIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % words.length)
+      setWordIndex((prev) => (prev + 1) % words.length)
     }, 5000)
-    // Clean up interval on unmount
     return () => clearInterval(interval);
   }, [])
 
-  const socialLinks = [
-    { icon: FaGithub, href: 'https://github.com/Shantanoo-Chandorkar', label: 'GitHub', color: '#AAA' },
-    { icon: SiLeetcode, href: 'https://leetcode.com/u/Shantanoo-Chandorkar', label: 'LeetCode', color: '#FFA116' },
-    { icon: FaLinkedin, href: 'https://linkedin.com/in/shantanoo-chandorkar', label: 'LinkedIn', color: '#0077B5' },
-    { icon: FaHackerrank, href: 'https://hackerrank.com/profile/cshantanoo123', label: 'HackerRank', color: '#00EA64' },
-    { icon: SiGeeksforgeeks, href: 'https://geeksforgeeks.org/user/cshantanoo123', label: 'GeeksForGeeks', color: '#2C8E46' },
-  ];
-
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIconIndex((prev) => (prev + 1) % socialLinks.length);
+      setCurrentIconIndex((prev) => (prev + 1) % heroSocialLinks.length);
     }, 10000);
 
     return () => clearInterval(interval);
-  }, [socialLinks.length]);
+  }, []);
 
   const getIconPosition = (
     index: number,
     currentIndex: number,
     radius: number
   ) => {
-    const totalIcons = socialLinks.length;
+    const totalIcons = heroSocialLinks.length;
     const angleStep = (2 * Math.PI) / totalIcons;
     const baseAngle = index * angleStep;
     const rotationOffset = currentIndex * angleStep;
@@ -111,49 +101,48 @@ export function HeroBanner() {
               {/* Animated Name */}
               <h1
                 ref={ref}
-                // className="text-4xl lg:text-5xl font-bold text-foreground mb-4 flex justify-center items-center"
                 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4 flex flex-wrap lg:flex-nowrap justify-center lg:justify-start items-center text-balance"
               >
-                {nameWords.map((word, wIndex) => (
-                  <span
-                    key={wIndex}
-                    // className="inline-block whitespace-nowrap"
-                    className="inline-block whitespace-nowrap break-keep mr-2"
-                  >
-                    {word.split("").map((letter, lIndex) => (
-                      <motion.span
-                        key={lIndex}
-                        variants={{
-                          hidden: { opacity: 0, y: 20 },
-                          visible: { opacity: 1, y: 0 },
-                        }}
-                        animate={isInView ? { opacity: 1 } : {}}
-                        transition={{ duration: 0.4, delay: (wIndex * word.length + lIndex) * 0.03 }}
-                        className="inline-block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
-                      >
-                        {letter}
-                      </motion.span>
-                    ))}
-                    {/* add natural space after each word */}
-                    {wIndex < words.length - 1 && "\u00A0"}
-                  </span>
-                ))}
+                <span className="sr-only">{name}</span>
+                <span aria-hidden="true" className="flex flex-wrap lg:flex-nowrap">
+                  {nameWords.map((word, wIndex) => (
+                    <span
+                      key={wIndex}
+                      className="inline-block whitespace-nowrap break-keep mr-2"
+                    >
+                      {word.split("").map((letter, lIndex) => (
+                        <motion.span
+                          key={lIndex}
+                          variants={{
+                            hidden: { opacity: 0, y: 20 },
+                            visible: { opacity: 1, y: 0 },
+                          }}
+                          animate={isInView ? { opacity: 1 } : {}}
+                          transition={{ duration: 0.4, delay: (wIndex * word.length + lIndex) * 0.03 }}
+                          className="inline-block bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
+                        >
+                          {letter}
+                        </motion.span>
+                      ))}
+                      {wIndex < nameWords.length - 1 && "\u00A0"}
+                    </span>
+                  ))}
+                </span>
               </h1>
               
               {/* Animated Title */}
-              {/* <div className="text-[2rem] text-center xs:text-center sm:text-center md:text-left lg:text-left xl:text-left sm:text-4xl font-bold md:text-[3rem] md:leading-[4rem] w-full gap-1.5 mb-4"> */}
               <div className="text-2xl sm:text-3xl md:text-4xl font-bold leading-snug text-center md:text-center lg:text-left mb-4 whitespace-nowrap break-keep">
                 {title}{' '}
                 <AnimatePresence mode="wait">
                   <motion.p
-                    key={words[index]}
+                    key={words[wordIndex]}
                     initial={{ opacity: 0, y: -40 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 40 }}
                     transition={{ duration: 0.2 }}
                     className="inline-block break-keep"
                   >
-                    {words[index]}
+                    {words[wordIndex]}
                   </motion.p>
                 </AnimatePresence>
               </div>
@@ -170,7 +159,7 @@ export function HeroBanner() {
               </motion.div>
             </motion.div>
             <p className="text-lg text-muted-foreground leading-relaxed max-w-lg font-bold">
-              {"Passionate full-stack developer with expertise in modern web technologies. Creating innovative solutions and beautiful user experiences."}
+              {"Full-stack developer specializing in React.js and PHP/WordPress — building performant web applications, scalable SaaS platforms, and custom WordPress products trusted by hundreds of thousands of users."}
             </p>
           </motion.div>
         </motion.div>
@@ -197,17 +186,17 @@ export function HeroBanner() {
               />
               <Image
                 src={"/banner-image.jpg"}
-                alt="Profile"
+                alt="Shantanoo Chandorkar profile photo"
                 width={450}
                 height={450}
-                loading='lazy'
+                priority
                 className="w-full h-full rounded-full object-cover border-4 border-border backdrop-blur-sm relative z-10"
               />
             </motion.div>
 
             {/* Animated Social Icons */}
             <div className="absolute inset-0 flex items-center justify-center">
-              {socialLinks.map((link, index) => {
+              {heroSocialLinks.map((link, index) => {
                 const position = getIconPosition(index, currentIconIndex, radius);
                 return (
                   <motion.a

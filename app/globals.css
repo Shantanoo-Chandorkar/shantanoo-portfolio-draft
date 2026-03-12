@@ -2,20 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 @layer base {
   
   :root {
@@ -69,44 +55,6 @@
   }
 }
 
- /* Light Theme - Nature Inspired (Greens, Woods, Leaves) */
- [data-theme="light"] {
-  --primary: #2d5d3a;              /* deep forest green */
-  --primary-foreground: #fff6d0;   /* soft leaf yellow */
-  --secondary: #d2c4a4;            /* soft wood beige */
-  --secondary-foreground: #1f4027;/* rich green bark */
-  --accent: #66994d;               /* lively leaf green */
-  --accent-foreground: #fff6d0;    /* light yellow-green */
-  --background: #f1eede;           /* soft earthy cream */
-  --foreground: #264d30;           /* natural deep green */
-  --card: #ede5cf;                 /* pale bark */
-  --card-foreground: #264d30;      /* dark leaf green */
-  --border: #b0c1a1;               /* mossy green */
-  --input: #b0c1a1;
-  --ring: #2d5d3a;                 /* deep green highlight */
-  --muted: #e8e1d2;                /* muted leaf brown */
-  --muted-foreground: #3c5c3e;     /* Adjusted for better contrast - Darker green text */
-}
-
-/* Dark Theme - Space Inspired (Black, Purples, Cosmic Accents) */
-[data-theme="dark"] {
-  --primary: #a780d9;              /* nebula violet */
-  --primary-foreground: #e8ecf1;   /* starlight white */
-  --secondary: #3a314d;            /* shadowy purple */
-  --secondary-foreground: #e8ecf1;
-  --accent: #b35fcc;               /* magenta nebula burst */
-  --accent-foreground: #e8ecf1;
-  --background: #0a0b11;           /* deep space black */
-  --foreground: #d0d6df;           /* star glow gray */
-  --card: #12131d;                 /* very dark purple */
-  --card-foreground: #d0d6df;
-  --border: #2c2e3a;               /* soft starlight border */
-  --input: #2c2e3a;
-  --ring: #a780d9;                 /* glowing purple ring */
-  --muted: #1e1f27;                /* cosmic dust gray */
-  --muted-foreground: #998eb6;     /* muted starlight */
-}
-
 @layer base {
   * {
     @apply border-border;
@@ -117,34 +65,33 @@
 }
 
 /* Custom gradient backgrounds */
-[data-theme="light"] body {
-  background: linear-gradient(135deg, 
-    hsl(120, 60%, 95%) 0%, 
-    hsl(90, 40%, 92%) 25%, 
-    hsl(60, 30%, 95%) 50%, 
-    hsl(30, 40%, 92%) 75%, 
+body {
+  background: linear-gradient(135deg,
+    hsl(120, 60%, 95%) 0%,
+    hsl(90, 40%, 92%) 25%,
+    hsl(60, 30%, 95%) 50%,
+    hsl(30, 40%, 92%) 75%,
     hsl(120, 60%, 95%) 100%);
   background-attachment: fixed;
 }
 
-[data-theme="dark"] body {
-  background: linear-gradient(135deg, 
-    hsl(224, 71%, 4%) 0%, 
-    hsl(263, 70%, 8%) 25%, 
-    hsl(280, 60%, 6%) 50%, 
-    hsl(240, 80%, 4%) 75%, 
+.dark body {
+  background: linear-gradient(135deg,
+    hsl(224, 71%, 4%) 0%,
+    hsl(263, 70%, 8%) 25%,
+    hsl(280, 60%, 6%) 50%,
+    hsl(240, 80%, 4%) 75%,
     hsl(224, 71%, 4%) 100%);
   background-attachment: fixed;
 }
 
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden; /* Prevents scrollbars */
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  overflow-x: hidden; /* Prevents scrollbars */
 }

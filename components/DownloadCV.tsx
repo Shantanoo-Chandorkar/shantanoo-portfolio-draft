@@ -4,33 +4,26 @@ import { motion } from 'framer-motion';
 import { Download, FileText, Star, Award } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { SectionHeader } from './SectionHeader';
+import { VIEWPORT_ONCE } from '@/lib/animation';
+
+const highlights = [
+  { icon: Star, text: '2 Years Experience' },
+  { icon: Award, text: 'MERN Stack Developer' },
+  { icon: FileText, text: 'WordPress, Magento, Shopify' },
+];
 
 export function DownloadCV() {
-  const highlights = [
-    { icon: Star, text: '2 Years Experience' },
-    { icon: Award, text: 'MERN Stack Developer' },
-    { icon: FileText, text: 'WordPress, Magento, Shopify' },
-  ];
-
   return (
     <section className="py-16 px-4">
       <div className="max-w-4xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ amount: 0.3 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold text-foreground mb-4">Download My CV</h2>
-          <p className="text-muted-foreground text-lg">Get a detailed overview of my experience and skills</p>
-        </motion.div>
+        <SectionHeader heading="Download My CV" subtitle="Get a detailed overview of my experience and skills" />
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ amount: 0.3 }}
+          viewport={VIEWPORT_ONCE}
         >
           <Card className="bg-gradient-to-br from-primary/10 to-accent/10 border-primary/30 backdrop-blur-sm">
             <CardContent className="p-8">
@@ -40,7 +33,7 @@ export function DownloadCV() {
                     initial={{ scale: 0.8 }}
                     whileInView={{ scale: 1 }}
                     transition={{ duration: 0.6, delay: 0.3 }}
-                    viewport={{ amount: 0.3 }}
+                    viewport={VIEWPORT_ONCE}
                     className="mb-6"
                   >
                     <div className="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto lg:mx-0 mb-4">
@@ -63,7 +56,7 @@ export function DownloadCV() {
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4, delay: index * 0.05 }}
-                        viewport={{ amount: 0.3 }}
+                        viewport={VIEWPORT_ONCE}
                         className="flex items-center justify-center lg:justify-start"
                       >
                         <highlight.icon className="w-5 h-5 text-primary mr-2" />
@@ -77,15 +70,16 @@ export function DownloadCV() {
                     whileTap={{ scale: 0.95 }}
                     className="text-center lg:text-left"
                   >
-                    <a href="/Resume_Shantanoo-Chandorkar.pdf" download>
-                      <Button
-                        size="lg"
-                        className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground px-8 py-3"
-                      >
+                    <Button
+                      asChild
+                      size="lg"
+                      className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground px-8 py-3"
+                    >
+                      <a href="/Shantanoo_Chandorkar_Resume.pdf" download>
                         <Download className="w-5 h-5 mr-2" />
                         Download CV (PDF)
-                      </Button>
-                    </a>
+                      </a>
+                    </Button>
                   </motion.div>
                 </div>
 
@@ -93,10 +87,10 @@ export function DownloadCV() {
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
-                  viewport={{ amount: 0.3 }}
+                  viewport={VIEWPORT_ONCE}
                   className="hidden lg:block"
                 >
-                  <div className="relative">
+                  <div className="relative" aria-hidden="true">
                     <motion.div
                       animate={{ rotate: [0, 5, -5, 0] }}
                       transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
@@ -143,11 +137,11 @@ export function DownloadCV() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ amount: 0.3 }}
+          viewport={VIEWPORT_ONCE}
           className="mt-8 text-center"
         >
           <p className="text-muted-foreground text-sm">
-            Last updated: April 2025 • Available in PDF format • Single page
+            Last updated: March 2026 • Available in PDF format • Single page
           </p>
         </motion.div>
       </div>

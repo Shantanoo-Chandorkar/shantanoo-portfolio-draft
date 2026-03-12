@@ -1,13 +1,45 @@
 'use client';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { Mail, Phone, MapPin, Github, Linkedin, Twitter, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
+import { SectionHeader } from './SectionHeader';
+import { contactSocialLinks } from '@/lib/social-links';
+import { VIEWPORT_ONCE } from '@/lib/animation';
+
+const contactInfo = [
+  {
+    icon: Mail,
+    label: 'Email',
+    value: 'shantanoochandorkar@gmail.com',
+    href: 'mailto:shantanoochandorkar@gmail.com'
+  },
+  {
+    icon: Phone,
+    label: 'Phone',
+    value: '+91 9930725465',
+    href: 'tel:+919930725465'
+  },
+  {
+    icon: MapPin,
+    label: 'Location',
+    value: 'Mumbai, India',
+    href: `https://www.google.com/maps/search/?api=1&query=Mumbai,+India`
+  }
+];
 
 export function Contact() {
+  const resetTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (resetTimerRef.current) clearTimeout(resetTimerRef.current);
+    };
+  }, []);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -50,7 +82,7 @@ export function Contact() {
       setIsSubmitted(true);
       
       // Reset form after 5 seconds
-      setTimeout(() => {
+      resetTimerRef.current = setTimeout(() => {
         setIsSubmitted(false);
         setFormData({ name: '', email: '', subject: '', message: '' });
       }, 5000);
@@ -62,55 +94,10 @@ export function Contact() {
     }
   };
 
-  const contactInfo = [
-    {
-      icon: Mail,
-      label: 'Email',
-      value: 'shantanoochandorkar@gmail.com',
-      href: 'mailto:shantanoochandorkar@gmail.com'
-    },
-    {
-      icon: Phone,
-      label: 'Phone',
-      value: '+91 9930725465',
-      href: 'tel:+919930725465'
-    },
-    {
-      icon: MapPin,
-      label: 'Location',
-      value: 'Mumbai, India',
-      href: `https://www.google.com/maps/search/?api=1&query=Mumbai,+India`
-    }
-  ];
-
-  const socialLinks = [
-    {
-      icon: Github,
-      label: 'GitHub',
-      href: 'https://github.com/Shantanoo-Chandorkar',
-      color: 'hover:text-gray-400'
-    },
-    {
-      icon: Linkedin,
-      label: 'LinkedIn',
-      href: 'https://linkedin.com/in/shantanoo-chandorkar',
-      color: 'hover:text-blue-400'
-    }
-  ];
-
   return (
     <section className="py-16 px-4">
       <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          viewport={{ amount: 0.3 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold text-foreground mb-4">Get In Touch</h2>
-          <p className="text-muted-foreground text-lg">{"Let's discuss your next project or opportunity"}</p>
-        </motion.div>
+        <SectionHeader heading="Get In Touch" subtitle="Let's discuss your next project or opportunity" delay={0.1} />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
@@ -118,7 +105,7 @@ export function Contact() {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ amount: 0.3 }}
+            viewport={VIEWPORT_ONCE}
           >
             <Card className="bg-card/50 border-border backdrop-blur-sm">
               <CardContent className="p-8">
@@ -239,7 +226,7 @@ export function Contact() {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ amount: 0.3 }}
+            viewport={VIEWPORT_ONCE}
             className="space-y-8"
           >
             <div>
@@ -248,9 +235,10 @@ export function Contact() {
                 {contactInfo.map((item, index) => (
                   <motion.a
                     key={index}
-                    href={item?.href}
+                    href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label={`Contact via ${item.label}: ${item.value}`}
                     whileHover={{ scale: 1.02 }}
                     className="flex items-center p-4 bg-card/50 border border-border rounded-lg hover:bg-card/70 transition-all duration-300 group"
                   >
@@ -271,7 +259,7 @@ export function Contact() {
             <div>
               <h3 className="text-xl font-bold text-foreground mb-6">Follow Me</h3>
               <div className="flex space-x-4">
-                {socialLinks.map((social, index) => (
+                {contactSocialLinks.map((social, index) => (
                   <motion.a
                     key={index}
                     href={social.href}

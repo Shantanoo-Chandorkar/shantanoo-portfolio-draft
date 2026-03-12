@@ -1,9 +1,8 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter, Montserrat } from 'next/font/google';
+import { Montserrat } from 'next/font/google';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 
-const inter = Inter({ subsets: ['latin'], display: 'swap' });
 const montserrat = Montserrat({
   subsets: ['latin'],
   display: 'swap',
@@ -26,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} ${montserrat.className}`}>
+      <body className={montserrat.className}>
         <ThemeProvider>
           {children}
         </ThemeProvider>
