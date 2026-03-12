@@ -15,6 +15,7 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 import { DecorativeElements } from '@/components/DecorativeElements';
 import { LandingChoice } from '@/components/LandingChoice';
 import { DesignToggle } from '@/components/DesignToggle';
+import { CinematicHero } from '@/components/cinematic/CinematicHero';
 
 function ClassicView() {
   return (
@@ -35,11 +36,14 @@ function ClassicView() {
 }
 
 function CinematicView() {
-  // Placeholder — will be filled in later chunks
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <p className="text-foreground text-2xl">Cinematic mode coming soon...</p>
-    </div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <CinematicHero />
+    </motion.div>
   );
 }
 
