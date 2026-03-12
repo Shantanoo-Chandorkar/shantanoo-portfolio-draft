@@ -34,9 +34,9 @@ function ClassicView() {
       <Experience />
       <Projects />
       <TechStack />
-      <About />
       <DownloadCV />
       <Contact />
+      <About />
     </motion.div>
   );
 }

@@ -18,12 +18,6 @@ const contactInfo = [
     href: 'mailto:shantanoochandorkar@gmail.com'
   },
   {
-    icon: Phone,
-    label: 'Phone',
-    value: '+91 9930725465',
-    href: 'tel:+919930725465'
-  },
-  {
     icon: MapPin,
     label: 'Location',
     value: 'Mumbai, India',

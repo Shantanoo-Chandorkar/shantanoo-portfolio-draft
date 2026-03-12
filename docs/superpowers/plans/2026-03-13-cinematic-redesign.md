@@ -1069,7 +1069,7 @@ const experiences: ExperienceEntry[] = [
     description: [
       'Overhauled CartFlows Flow Analytics, expanding tracked KPIs from 8 to 24 (+200%) with new tabular data views, achieving zero regression and no performance degradation on a database-heavy implementation.',
       'Engineered a full-featured interactive Canvas Builder from scratch using React and ReactFlow, dynamically visualizing complete funnel flows and all nested steps in a node-based UI.',
-      'Resolved 3 critical payment failures — Stripe Express Checkout blocking transactions, PayPal infinite loading on upsell, and Google Pay misrouting to WooCommerce — cutting payment-related support tickets by 90%.',
+      'Resolved 3+ critical payment failures — Stripe Express Checkout blocking transactions, PayPal infinite loading on upsell, and Google Pay misrouting to WooCommerce — cutting payment-related support tickets by 90%.',
       'Conducted a comprehensive security audit of the CartFlows plugin and independently remediated all identified vulnerabilities spanning all CVSS severity tiers.',
       'Pioneered WordPress Abilities API integration for CartFlows, mapping plugin capabilities as MCP-compatible tools within the WordPress MCP server architecture.',
     ],

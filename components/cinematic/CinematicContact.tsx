@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useRef, useEffect } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle, Download, BookOpen, Mountain, Tv } from 'lucide-react';
+import { Mail, MapPin, Send, CheckCircle, AlertCircle, Download, BookOpen, Mountain, Tv } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -13,7 +13,6 @@ import { VIEWPORT_ONCE } from '@/lib/animation';
 
 const contactInfo = [
   { icon: Mail, label: 'Email', value: 'shantanoochandorkar@gmail.com', href: 'mailto:shantanoochandorkar@gmail.com' },
-  { icon: Phone, label: 'Phone', value: '+91 9930725465', href: 'tel:+919930725465' },
   { icon: MapPin, label: 'Location', value: 'Mumbai, India', href: 'https://www.google.com/maps/search/?api=1&query=Mumbai,+India' },
 ];
 

@@ -9,14 +9,14 @@ import { VIEWPORT_ONCE } from '@/lib/animation';
 
 const highlights = [
   { icon: Star, text: '2 Years Experience' },
-  { icon: Award, text: 'MERN Stack Developer' },
+  { icon: Award, text: 'Full-Stack Developer' },
   { icon: FileText, text: 'WordPress, Magento, Shopify' },
 ];
 
 export function DownloadCV() {
   return (
     <section className="py-16 px-4">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <SectionHeader heading="Download My CV" subtitle="Get a detailed overview of my experience and skills" />
 
         <motion.div
