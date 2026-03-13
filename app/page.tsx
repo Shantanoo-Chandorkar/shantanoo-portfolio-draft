@@ -5,7 +5,6 @@ import { useDesignMode } from '@/contexts/DesignContext';
 
 // Classic components
 import { HeroBanner } from '@/components/HeroBanner';
-import { Experience } from '@/components/Experience';
 import { Projects } from '@/components/Projects';
 import { TechStack } from '@/components/TechStack';
 import { About } from '@/components/About';
@@ -31,7 +30,7 @@ function ClassicView() {
       transition={{ duration: 0.5 }}
     >
       <HeroBanner />
-      <Experience />
+      <CinematicExperience />
       <Projects />
       <TechStack />
       <DownloadCV />
