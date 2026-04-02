@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { submitContactForm } from '@/lib/contact-service';
 
 interface FormData {
 	name: string;
@@ -14,7 +15,14 @@ const EMPTY_FORM: FormData = { name: '', email: '', subject: '', message: '' };
 // Reset delay in ms after a successful submission before the form clears
 const SUCCESS_RESET_DELAY = 5000;
 
-export function useContactForm() {
+/**
+ * Manages contact form state and submission lifecycle.
+ * Clears the form and resets the submitted flag after a delay following
+ * a successful send. Cancels any pending reset timer on unmount.
+ * @param endpoint - The API route to submit the form to
+ * @returns Form state (formData, isSubmitting, isSubmitted, error) and event handlers
+ */
+export function useContactForm(endpoint = '/api/send-email') {
 	const resetTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
 	useEffect(() => {
@@ -39,15 +47,7 @@ export function useContactForm() {
 		setError('');
 
 		try {
-			const response = await fetch('/api/send-email', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(formData),
-			});
-
-			const data = await response.json();
-
-			if (!response.ok) throw new Error(data.error || 'Failed to send email');
+			await submitContactForm(formData, endpoint);
 
 			setIsSubmitted(true);
 			resetTimerRef.current = setTimeout(() => {
