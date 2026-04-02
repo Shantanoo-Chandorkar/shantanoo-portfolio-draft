@@ -8,143 +8,148 @@ import { SectionHeader } from './SectionHeader';
 import { VIEWPORT_ONCE } from '@/lib/animation';
 
 const highlights = [
-  { icon: Star, text: '2 Years Experience' },
-  { icon: Award, text: 'Full-Stack Developer' },
-  { icon: FileText, text: 'WordPress, Magento, Shopify' },
+	{ icon: Star, text: '2 Years Experience' },
+	{ icon: Award, text: 'Full-Stack Developer' },
+	{ icon: FileText, text: 'WordPress, Magento, Shopify' },
 ];
 
 export function DownloadCV() {
-  return (
-    <section className="py-16 px-4">
-      <div className="max-w-6xl mx-auto">
-        <SectionHeader heading="Download My CV" subtitle="Get a detailed overview of my experience and skills" />
+	return (
+		<section className="py-16 px-4">
+			<div className="max-w-6xl mx-auto">
+				<SectionHeader
+					heading="Download My CV"
+					subtitle="Get a detailed overview of my experience and skills"
+				/>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={VIEWPORT_ONCE}
-        >
-          <Card className="bg-gradient-to-br from-primary/10 to-accent/10 border-primary/30 backdrop-blur-sm">
-            <CardContent className="p-8">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                <div>
-                  <motion.div
-                    initial={{ scale: 0.8 }}
-                    whileInView={{ scale: 1 }}
-                    transition={{ duration: 0.6, delay: 0.3 }}
-                    viewport={VIEWPORT_ONCE}
-                    className="mb-6"
-                  >
-                    <div className="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto lg:mx-0 mb-4">
-                      <FileText className="w-10 h-10 text-primary-foreground" />
-                    </div>
-                  </motion.div>
-                  
-                  <h3 className="text-2xl font-bold text-foreground mb-4 text-center lg:text-left">
-                    Comprehensive Resume
-                  </h3>
-                  
-                  <p className="text-muted-foreground mb-6 text-center lg:text-left">
-                    {"Download my complete CV to get information about my professional experience, technical skills, education, and achievements. Let's connect and explore how I can contribute to your team!"}
-                  </p>
+				<motion.div
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.6 }}
+					viewport={VIEWPORT_ONCE}
+				>
+					<Card className="bg-gradient-to-br from-primary/10 to-accent/10 border-primary/30 backdrop-blur-sm">
+						<CardContent className="p-8">
+							<div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+								<div>
+									<motion.div
+										initial={{ scale: 0.8 }}
+										whileInView={{ scale: 1 }}
+										transition={{ duration: 0.6, delay: 0.3 }}
+										viewport={VIEWPORT_ONCE}
+										className="mb-6"
+									>
+										<div className="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto lg:mx-0 mb-4">
+											<FileText className="w-10 h-10 text-primary-foreground" />
+										</div>
+									</motion.div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-                    {highlights.map((highlight, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.4, delay: index * 0.05 }}
-                        viewport={VIEWPORT_ONCE}
-                        className="flex items-center justify-center lg:justify-start"
-                      >
-                        <highlight.icon className="w-5 h-5 text-primary mr-2" />
-                        <span className="text-muted-foreground text-[0.75rem]">{highlight.text}</span>
-                      </motion.div>
-                    ))}
-                  </div>
+									<h3 className="text-2xl font-bold text-foreground mb-4 text-center lg:text-left">
+										Comprehensive Resume
+									</h3>
 
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="text-center lg:text-left"
-                  >
-                    <Button
-                      asChild
-                      size="lg"
-                      className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground px-8 py-3"
-                    >
-                      <a href="/Shantanoo_Chandorkar_Resume.pdf" download>
-                        <Download className="w-5 h-5 mr-2" />
-                        Download CV (PDF)
-                      </a>
-                    </Button>
-                  </motion.div>
-                </div>
+									<p className="text-muted-foreground mb-6 text-center lg:text-left">
+										{
+											"Download my complete CV to get information about my professional experience, technical skills, education, and achievements. Let's connect and explore how I can contribute to your team!"
+										}
+									</p>
 
-                <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  viewport={VIEWPORT_ONCE}
-                  className="hidden lg:block"
-                >
-                  <div className="relative" aria-hidden="true">
-                    <motion.div
-                      animate={{ rotate: [0, 5, -5, 0] }}
-                      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                      className="bg-card rounded-lg shadow-2xl p-6 max-w-sm mx-auto border border-border"
-                    >
-                      <div className="space-y-4">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-12 h-12 bg-primary rounded-full"></div>
-                          <div>
-                            <div className="h-3 bg-muted rounded w-24 mb-1"></div>
-                            <div className="h-2 bg-muted/60 rounded w-20"></div>
-                          </div>
-                        </div>
-                        
-                        <div className="space-y-2">
-                          <div className="h-2 bg-muted/60 rounded w-full"></div>
-                          <div className="h-2 bg-muted/60 rounded w-4/5"></div>
-                          <div className="h-2 bg-muted/60 rounded w-3/4"></div>
-                        </div>
-                        
-                        <div className="space-y-2">
-                          <div className="h-2 bg-primary/30 rounded w-full"></div>
-                          <div className="h-2 bg-primary/30 rounded w-5/6"></div>
-                        </div>
-                        
-                        <div className="grid grid-cols-2 gap-2">
-                          <div className="h-8 bg-muted/30 rounded"></div>
-                          <div className="h-8 bg-muted/30 rounded"></div>
-                        </div>
-                      </div>
-                    </motion.div>
-                    
-                    <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                      <FileText className="w-3 h-3 text-white" />
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
+									<div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+										{highlights.map((highlight, index) => (
+											<motion.div
+												key={index}
+												initial={{ opacity: 0, y: 10 }}
+												whileInView={{ opacity: 1, y: 0 }}
+												transition={{ duration: 0.4, delay: index * 0.05 }}
+												viewport={VIEWPORT_ONCE}
+												className="flex items-center justify-center lg:justify-start"
+											>
+												<highlight.icon className="w-5 h-5 text-primary mr-2" />
+												<span className="text-muted-foreground text-[0.75rem]">{highlight.text}</span>
+											</motion.div>
+										))}
+									</div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={VIEWPORT_ONCE}
-          className="mt-8 text-center"
-        >
-          <p className="text-muted-foreground text-sm">
-            Last updated: March 2026 • Available in PDF format • Single page
-          </p>
-        </motion.div>
-      </div>
-    </section>
-  );
+									<motion.div
+										whileHover={{ scale: 1.05 }}
+										whileTap={{ scale: 0.95 }}
+										className="text-center lg:text-left"
+									>
+										<Button
+											asChild
+											size="lg"
+											className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground px-8 py-3"
+										>
+											<a href="/Shantanoo_Chandorkar_Resume.pdf" download>
+												<Download className="w-5 h-5 mr-2" />
+												Download CV (PDF)
+											</a>
+										</Button>
+									</motion.div>
+								</div>
+
+								<motion.div
+									initial={{ opacity: 0, x: 20 }}
+									whileInView={{ opacity: 1, x: 0 }}
+									transition={{ duration: 0.6, delay: 0.2 }}
+									viewport={VIEWPORT_ONCE}
+									className="hidden lg:block"
+								>
+									<div className="relative" aria-hidden="true">
+										<motion.div
+											animate={{ rotate: [0, 5, -5, 0] }}
+											transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+											className="bg-card rounded-lg shadow-2xl p-6 max-w-sm mx-auto border border-border"
+										>
+											<div className="space-y-4">
+												<div className="flex items-center space-x-3">
+													<div className="w-12 h-12 bg-primary rounded-full"></div>
+													<div>
+														<div className="h-3 bg-muted rounded w-24 mb-1"></div>
+														<div className="h-2 bg-muted/60 rounded w-20"></div>
+													</div>
+												</div>
+
+												<div className="space-y-2">
+													<div className="h-2 bg-muted/60 rounded w-full"></div>
+													<div className="h-2 bg-muted/60 rounded w-4/5"></div>
+													<div className="h-2 bg-muted/60 rounded w-3/4"></div>
+												</div>
+
+												<div className="space-y-2">
+													<div className="h-2 bg-primary/30 rounded w-full"></div>
+													<div className="h-2 bg-primary/30 rounded w-5/6"></div>
+												</div>
+
+												<div className="grid grid-cols-2 gap-2">
+													<div className="h-8 bg-muted/30 rounded"></div>
+													<div className="h-8 bg-muted/30 rounded"></div>
+												</div>
+											</div>
+										</motion.div>
+
+										<div className="absolute -top-2 -right-2 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+											<FileText className="w-3 h-3 text-white" />
+										</div>
+									</div>
+								</motion.div>
+							</div>
+						</CardContent>
+					</Card>
+				</motion.div>
+
+				<motion.div
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					transition={{ duration: 0.6, delay: 0.2 }}
+					viewport={VIEWPORT_ONCE}
+					className="mt-8 text-center"
+				>
+					<p className="text-muted-foreground text-sm">
+						Last updated: March 2026 • Available in PDF format • Single page
+					</p>
+				</motion.div>
+			</div>
+		</section>
+	);
 }

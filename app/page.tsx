@@ -23,61 +23,53 @@ import { CinematicContact } from '@/components/cinematic/CinematicContact';
 import { FloatingCVButton } from '@/components/cinematic/FloatingCVButton';
 
 function ClassicView() {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-    >
-      <HeroBanner />
-      <CinematicExperience />
-      <Projects />
-      <TechStack />
-      <DownloadCV />
-      <Contact />
-      <About />
-    </motion.div>
-  );
+	return (
+		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+			<HeroBanner />
+			<CinematicExperience />
+			<Projects />
+			<TechStack />
+			<DownloadCV />
+			<Contact />
+			<About />
+		</motion.div>
+	);
 }
 
 function CinematicView() {
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-    >
-      <CinematicHero />
-      <StickyNavbar />
-      <CinematicExperience />
-      <CinematicProjects />
-      <CinematicTechStack />
-      <CinematicContact />
-      <FloatingCVButton />
-    </motion.div>
-  );
+	return (
+		<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+			<CinematicHero />
+			<StickyNavbar />
+			<CinematicExperience />
+			<CinematicProjects />
+			<CinematicTechStack />
+			<CinematicContact />
+			<FloatingCVButton />
+		</motion.div>
+	);
 }
 
 export default function Home() {
-  const { designMode, hasChosen, isLoaded } = useDesignMode();
+	const { designMode, hasChosen, isLoaded } = useDesignMode();
 
-  // While loading from localStorage, render nothing to prevent flash
-  if (!isLoaded) return null;
+	// While loading from localStorage, render nothing to prevent flash
+	if (!isLoaded) return null;
 
-  return (
-    <main className="min-h-screen relative">
-      <DecorativeElements />
-      <ThemeToggle />
+	return (
+		<main className="min-h-screen relative">
+			<DecorativeElements />
+			<ThemeToggle />
 
-      {/* Show landing choice if no preference saved */}
-      {!hasChosen && designMode === null && <LandingChoice />}
+			{/* Show landing choice if no preference saved */}
+			{!hasChosen && designMode === null && <LandingChoice />}
 
-      {/* Show design toggle once a choice has been made */}
-      {hasChosen && <DesignToggle />}
+			{/* Show design toggle once a choice has been made */}
+			{hasChosen && <DesignToggle />}
 
-      {/* Render the chosen design */}
-      {designMode === 'classic' && <ClassicView />}
-      {designMode === 'cinematic' && <CinematicView />}
-    </main>
-  );
+			{/* Render the chosen design */}
+			{designMode === 'classic' && <ClassicView />}
+			{designMode === 'cinematic' && <CinematicView />}
+		</main>
+	);
 }
