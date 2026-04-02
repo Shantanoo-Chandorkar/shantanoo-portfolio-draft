@@ -1,7 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
-import { useState, useRef, useEffect } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { useContactForm } from '@/hooks/useContactForm';
+import { Send, CheckCircle, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -9,84 +9,10 @@ import { Card, CardContent } from '@/components/ui/card';
 import { SectionHeader } from './SectionHeader';
 import { contactSocialLinks } from '@/lib/social-links';
 import { VIEWPORT_ONCE } from '@/lib/animation';
-
-const contactInfo = [
-  {
-    icon: Mail,
-    label: 'Email',
-    value: 'shantanoochandorkar@gmail.com',
-    href: 'mailto:shantanoochandorkar@gmail.com'
-  },
-  {
-    icon: MapPin,
-    label: 'Location',
-    value: 'Mumbai, India',
-    href: `https://www.google.com/maps/search/?api=1&query=Mumbai,+India`
-  }
-];
+import { contactInfo } from '@/lib/data/contact';
 
 export function Contact() {
-  const resetTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    return () => {
-      if (resetTimerRef.current) clearTimeout(resetTimerRef.current);
-    };
-  }, []);
-
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [error, setError] = useState('');
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-    // Clear error when user starts typing
-    if (error) setError('');
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setError('');
-
-    try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to send email');
-      }
-
-      setIsSubmitted(true);
-      
-      // Reset form after 5 seconds
-      resetTimerRef.current = setTimeout(() => {
-        setIsSubmitted(false);
-        setFormData({ name: '', email: '', subject: '', message: '' });
-      }, 5000);
-    } catch (error) {
-      console.error('Error sending email:', error);
-      setError(error instanceof Error ? error.message : 'Failed to send email. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  const { formData, isSubmitting, isSubmitted, error, handleInputChange, handleSubmit } = useContactForm();
 
   return (
     <section className="py-16 px-4">

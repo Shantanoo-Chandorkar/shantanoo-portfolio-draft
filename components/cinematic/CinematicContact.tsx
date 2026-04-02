@@ -1,8 +1,9 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useRef, useEffect } from 'react';
-import { Mail, MapPin, Send, CheckCircle, AlertCircle, Download, BookOpen, Mountain, Tv } from 'lucide-react';
+import { useState } from 'react';
+import { useContactForm } from '@/hooks/useContactForm';
+import { Send, CheckCircle, AlertCircle, Download, BookOpen, Mountain, Tv } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -10,11 +11,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { SectionHeader } from '@/components/SectionHeader';
 import { contactSocialLinks } from '@/lib/social-links';
 import { VIEWPORT_ONCE } from '@/lib/animation';
-
-const contactInfo = [
-  { icon: Mail, label: 'Email', value: 'shantanoochandorkar@gmail.com', href: 'mailto:shantanoochandorkar@gmail.com' },
-  { icon: MapPin, label: 'Location', value: 'Mumbai, India', href: 'https://www.google.com/maps/search/?api=1&query=Mumbai,+India' },
-];
+import { contactInfo } from '@/lib/data/contact';
 
 const personalityItems = [
   { icon: BookOpen, label: 'Avid Reader', description: 'An avid reader who believes in the power of knowledge and storytelling.' },
@@ -23,48 +20,8 @@ const personalityItems = [
 ];
 
 export function CinematicContact() {
-  const resetTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [expandedPersonality, setExpandedPersonality] = useState<string | null>(null);
-
-  useEffect(() => {
-    return () => {
-      if (resetTimerRef.current) clearTimeout(resetTimerRef.current);
-    };
-  }, []);
-
-  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [error, setError] = useState('');
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    if (error) setError('');
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setError('');
-    try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-      const data = await response.json();
-      if (!response.ok) throw new Error(data.error || 'Failed to send email');
-      setIsSubmitted(true);
-      resetTimerRef.current = setTimeout(() => {
-        setIsSubmitted(false);
-        setFormData({ name: '', email: '', subject: '', message: '' });
-      }, 5000);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to send email. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  const { formData, isSubmitting, isSubmitted, error, handleInputChange, handleSubmit } = useContactForm();
 
   return (
     <section id="contact" className="py-16 px-4">

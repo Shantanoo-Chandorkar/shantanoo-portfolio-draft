@@ -1,7 +1,8 @@
 'use client';
 
 import { motion, useMotionValue, useTransform, PanInfo, AnimatePresence } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useModal } from '@/hooks/useModal';
 import { ExternalLink, X } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 import { Card, CardContent } from '@/components/ui/card';
@@ -11,18 +12,8 @@ import Image from 'next/image';
 import { SectionHeader } from './SectionHeader';
 import { TechBadge } from './TechBadge';
 import { VIEWPORT_ONCE } from '@/lib/animation';
-
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  longDescription: string;
-  technologies: string[];
-  image: string;
-  githubUrl: string;
-  liveUrl: string;
-  features: string[];
-}
+import type { Project } from '@/lib/types';
+import { projects } from '@/lib/data/projects';
 
 interface ProjectCardProps {
   project: Project;
@@ -31,42 +22,6 @@ interface ProjectCardProps {
   onDragEnd: (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo, project: Project) => void;
   onClick: (project: Project) => void;
 }
-
-const projects: Project[] = [
-  {
-    id: 1,
-    title: 'CineMix Platform',
-    description: 'A Full-Stack application for Movies and TV shows.',
-    longDescription: 'A Full-Stack application that leverages the IMDB API to provide users with searchable movie and TV show information, including details like ratings, cast, and plot summaries.',
-    technologies: ['React.js', 'Node.js', 'Express', 'MongoDB', 'Javascript', 'Tailwind CSS', 'IMDB API', 'Axios', 'Redux', 'JWT', 'Bcrypt', 'Mongoose'],
-    image: '/cinemix.png',
-    githubUrl: 'https://github.com/Shantanoo-Chandorkar/mern-movie-app',
-    liveUrl: 'https://cinemixmern.netlify.app/',
-    features: ['React Skeletons', 'Search Functionality', 'Movie Details', 'User Authentication', 'Responsive Design', 'Favorite Movies', 'Lazy Loading']
-  },
-  {
-    id: 2,
-    title: 'Habit Tracker',
-    description: 'Modern Habit Tracker with Analytics feature coming soon.',
-    longDescription: 'A robust habit tracking platform where users can authenticate, organize habits by category, and monitor their progress through detailed weekly, monthly, and yearly insights, with analytics coming soon.',
-    technologies: ['Next.js', 'MongoDB', 'App Router', 'JavaScript', 'Bcrypt'],
-    image: '/habit-tracker.png',
-    githubUrl: 'https://github.com/Shantanoo-Chandorkar/next-habit-tracker',
-    liveUrl: 'https://next-habit-tracker.vercel.app/',
-    features: ['User Authentication', 'Progress Tracking', 'Weekly Insights', 'Monthly Insights', 'Yearly Insights', 'Responsive Design', 'Analytics Coming Soon']
-  },
-  {
-    id: 3,
-    title: 'Portfolio Project',
-    description: 'Portfolio project showcasing frontend skills with intuitive UI and animations',
-    longDescription: 'A portfolio project that highlights my frontend development skills, featuring an intuitive user interface, smooth animations, and responsive design. It serves as a showcase of my work and abilities in web development.',
-    technologies: ['Next.js', 'Tailwind CSS', 'Framer Motion', 'TypeScript', 'React'],
-    image: '/portfolio-1.png',
-    githubUrl: 'https://github.com/Shantanoo-Chandorkar/shantanoo-portfolio-draft',
-    liveUrl: '', // Replace with actual live URL if available
-    features: ['Responsive Design', 'Smooth Animations', 'Intuitive UI', 'Portfolio Showcase', 'Dark Mode', 'Light Mode']
-  },
-];
 
 function ProjectCard({ project, index, totalCards, onDragEnd, onClick }: ProjectCardProps) {
   const x = useMotionValue(0);
@@ -128,17 +83,7 @@ export function Projects() {
   const { theme } = useTheme();
 
   const [cards, setCards] = useState(projects);
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setSelectedProject(null);
-    };
-    if (selectedProject) {
-      document.addEventListener('keydown', handleKeyDown);
-    }
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [selectedProject]);
+  const { selected: selectedProject, open: openProject, close: closeProject } = useModal<Project>();
 
   const removeCard = (id: number) => {
     setCards(prev => {
@@ -160,7 +105,7 @@ export function Projects() {
     
     if (info.offset.x > threshold) {
       // Right swipe - open modal
-      setSelectedProject(project);
+      openProject(project);
     } else if (info.offset.x < -threshold) {
       // Left swipe - remove card
       removeCard(project.id);
@@ -197,7 +142,7 @@ export function Projects() {
                   index={index}
                   totalCards={cards.length}
                   onDragEnd={handleDragEnd}
-                  onClick={setSelectedProject}
+                  onClick={openProject}
                 />
               ))
             )}
@@ -213,7 +158,7 @@ export function Projects() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-              onClick={() => setSelectedProject(null)}
+              onClick={closeProject}
             >
               <motion.div
                 role="dialog"
@@ -238,7 +183,7 @@ export function Projects() {
                     size="sm"
                     aria-label="Close modal"
                     className="absolute top-4 right-4 bg-background/50 text-foreground hover:bg-background/70"
-                    onClick={() => setSelectedProject(null)}
+                    onClick={closeProject}
                   >
                     <X className="w-4 h-4" />
                   </Button>

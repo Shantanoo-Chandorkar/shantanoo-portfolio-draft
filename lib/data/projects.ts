@@ -1,0 +1,37 @@
+import type { Project } from '@/lib/types';
+
+export const projects: Project[] = [
+	{
+		id: 1,
+		title: 'CineMix Platform',
+		description: 'A Full-Stack application for Movies and TV shows.',
+		longDescription: 'A Full-Stack application that leverages the IMDB API to provide users with searchable movie and TV show information, including details like ratings, cast, and plot summaries.',
+		technologies: ['React.js', 'Node.js', 'Express', 'MongoDB', 'Javascript', 'Tailwind CSS', 'IMDB API', 'Axios', 'Redux', 'JWT', 'Bcrypt', 'Mongoose'],
+		image: '/cinemix.png',
+		githubUrl: 'https://github.com/Shantanoo-Chandorkar/mern-movie-app',
+		liveUrl: 'https://cinemixmern.netlify.app/',
+		features: ['React Skeletons', 'Search Functionality', 'Movie Details', 'User Authentication', 'Responsive Design', 'Favorite Movies', 'Lazy Loading'],
+	},
+	{
+		id: 2,
+		title: 'Habit Tracker',
+		description: 'Modern Habit Tracker with Analytics feature coming soon.',
+		longDescription: 'A robust habit tracking platform where users can authenticate, organize habits by category, and monitor their progress through detailed weekly, monthly, and yearly insights, with analytics coming soon.',
+		technologies: ['Next.js', 'MongoDB', 'App Router', 'JavaScript', 'Bcrypt'],
+		image: '/habit-tracker.png',
+		githubUrl: 'https://github.com/Shantanoo-Chandorkar/next-habit-tracker',
+		liveUrl: 'https://next-habit-tracker.vercel.app/',
+		features: ['User Authentication', 'Progress Tracking', 'Weekly Insights', 'Monthly Insights', 'Yearly Insights', 'Responsive Design', 'Analytics Coming Soon'],
+	},
+	{
+		id: 3,
+		title: 'Portfolio Project',
+		description: 'Portfolio project showcasing frontend skills with intuitive UI and animations',
+		longDescription: 'A portfolio project that highlights my frontend development skills, featuring an intuitive user interface, smooth animations, and responsive design. It serves as a showcase of my work and abilities in web development.',
+		technologies: ['Next.js', 'Tailwind CSS', 'Framer Motion', 'TypeScript', 'React'],
+		image: '/portfolio-1.png',
+		githubUrl: 'https://github.com/Shantanoo-Chandorkar/shantanoo-portfolio-draft',
+		liveUrl: '',
+		features: ['Responsive Design', 'Smooth Animations', 'Intuitive UI', 'Portfolio Showcase', 'Dark Mode', 'Light Mode'],
+	},
+];
