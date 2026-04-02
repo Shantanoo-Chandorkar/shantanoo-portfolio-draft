@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { Send, CheckCircle, AlertCircle, Mail, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -10,6 +10,12 @@ import { contactSocialLinks } from '@/lib/social-links';
 import { contactInfo } from '@/lib/data/contact';
 import { useContactForm } from '@/hooks/useContactForm';
 import { VIEWPORT_ONCE } from '@/lib/animation';
+
+// Icons live here rather than in the data file — icon components are a UI concern
+const contactIcons: Record<string, React.ElementType> = {
+	Email: Mail,
+	Location: MapPin,
+};
 
 interface ContactFormPanelProps {
 	delay?: number;
@@ -159,36 +165,39 @@ export function ContactFormPanel({ delay = 0.2 }: ContactFormPanelProps) {
 				<div>
 					<h3 className="text-2xl font-bold text-foreground mb-6">Contact Information</h3>
 					<div className="space-y-4">
-						{contactInfo.map((item, index) => (
-							<motion.a
-								key={index}
-								href={item.href}
-								target="_blank"
-								rel="noopener noreferrer"
-								aria-label={`Contact via ${item.label}: ${item.value}`}
-								whileHover={{ scale: 1.02 }}
-								className="flex items-center p-4 bg-card/50 border border-border rounded-lg hover:bg-card/70 transition-all duration-300 group"
-							>
-								<div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mr-4">
-									<item.icon className="w-6 h-6 text-primary-foreground" />
-								</div>
-								<div>
-									<p className="text-muted-foreground text-sm">{item.label}</p>
-									<p className="text-foreground text-xs font-medium group-hover:text-primary transition-colors">
-										{item.value}
-									</p>
-								</div>
-							</motion.a>
-						))}
+						{contactInfo.map((item) => {
+							const Icon = contactIcons[item.label];
+							return (
+								<motion.a
+									key={item.label}
+									href={item.href}
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label={`Contact via ${item.label}: ${item.value}`}
+									whileHover={{ scale: 1.02 }}
+									className="flex items-center p-4 bg-card/50 border border-border rounded-lg hover:bg-card/70 transition-all duration-300 group"
+								>
+									<div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mr-4">
+										<Icon className="w-6 h-6 text-primary-foreground" />
+									</div>
+									<div>
+										<p className="text-muted-foreground text-sm">{item.label}</p>
+										<p className="text-foreground text-xs font-medium group-hover:text-primary transition-colors">
+											{item.value}
+										</p>
+									</div>
+								</motion.a>
+							);
+						})}
 					</div>
 				</div>
 
 				<div>
 					<h3 className="text-xl font-bold text-foreground mb-6">Follow Me</h3>
 					<div className="flex space-x-4">
-						{contactSocialLinks.map((social, index) => (
+						{contactSocialLinks.map((social) => (
 							<motion.a
-								key={index}
+								key={social.label}
 								href={social.href}
 								target="_blank"
 								rel="noopener noreferrer"
