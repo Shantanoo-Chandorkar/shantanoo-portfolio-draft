@@ -13,6 +13,13 @@ interface ProjectModalProps {
 	onClose: () => void;
 }
 
+/**
+ * Renders an animated modal overlay for a selected project.
+ * Displays the project image, description, features, technologies, and links.
+ * Closes when the backdrop is clicked or the close button is activated.
+ * @param project - The project to display, or null to render nothing
+ * @param onClose - Callback invoked when the user dismisses the modal
+ */
 export function ProjectModal({ project, onClose }: ProjectModalProps) {
 	return (
 		<AnimatePresence>

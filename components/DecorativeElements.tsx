@@ -67,7 +67,6 @@ export function DecorativeElements() {
 	if (theme === 'light') {
 		return (
 			<div className="fixed inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-				{/* Floating leaves */}
 				{leafData.map((leaf, i) => (
 					<motion.div
 						key={`leaf-${i}`}
@@ -80,7 +79,6 @@ export function DecorativeElements() {
 					</motion.div>
 				))}
 
-				{/* Floating flowers */}
 				{flowerData.map((flower, i) => (
 					<motion.div
 						key={`flower-${i}`}
@@ -98,7 +96,6 @@ export function DecorativeElements() {
 					</motion.div>
 				))}
 
-				{/* Sun rays */}
 				<motion.div
 					className="absolute top-10 right-20 w-32 h-32 opacity-10"
 					animate={{ rotate: 360 }}
@@ -112,7 +109,6 @@ export function DecorativeElements() {
 
 	return (
 		<div className="fixed inset-0 pointer-events-none overflow-hidden">
-			{/* Twinkling stars */}
 			{starData.map((star, i) => (
 				<motion.div
 					key={`star-${i}`}
@@ -128,7 +124,6 @@ export function DecorativeElements() {
 				/>
 			))}
 
-			{/* Shooting stars */}
 			{shootingStarData.map((star, i) => (
 				<motion.div
 					key={`shooting-star-${i}`}
@@ -139,7 +134,6 @@ export function DecorativeElements() {
 				/>
 			))}
 
-			{/* Floating planets */}
 			{[
 				{ size: 'w-8 h-8', color: 'bg-purple-400', left: '10%', top: '20%' },
 				{ size: 'w-6 h-6', color: 'bg-blue-400', left: '40%', top: '40%' },
@@ -154,7 +148,6 @@ export function DecorativeElements() {
 				/>
 			))}
 
-			{/* Nebula clouds */}
 			<motion.div
 				className="absolute top-1/4 left-1/4 w-64 h-64 opacity-5"
 				animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}

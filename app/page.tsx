@@ -50,6 +50,11 @@ function CinematicView() {
 	);
 }
 
+/**
+ * Root page component. Reads the user's saved design preference and renders
+ * LandingChoice (no preference), ClassicView, or CinematicView accordingly.
+ * Renders nothing until the preference is loaded to prevent a flash of wrong content.
+ */
 export default function Home() {
 	const { designMode, hasChosen, isLoaded } = useDesignMode();
 
