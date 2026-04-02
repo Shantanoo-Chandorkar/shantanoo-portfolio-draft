@@ -1,5 +1,5 @@
 'use client';
-// src/contexts/ThemeContext.tsx
+
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 type Theme = 'light' | 'dark';
@@ -10,29 +10,84 @@ interface ThemeContextType {
 	toggleTheme: () => void;
 }
 
+interface StorageAdapter {
+	getItem(key: string): string | null;
+	setItem(key: string, value: string): void;
+}
+
+interface DOMAdapter {
+	addClass(className: string): void;
+	removeClass(className: string): void;
+}
+
+const defaultStorage: StorageAdapter = {
+	getItem: (key) => (typeof localStorage !== 'undefined' ? localStorage.getItem(key) : null),
+	setItem: (key, value) => {
+		if (typeof localStorage !== 'undefined') {
+			localStorage.setItem(key, value);
+		}
+	},
+};
+
+const defaultDOMAdapter: DOMAdapter = {
+	addClass: (className) => {
+		if (typeof document !== 'undefined') {
+			document.documentElement.classList.add(className);
+		}
+	},
+	removeClass: (className) => {
+		if (typeof document !== 'undefined') {
+			document.documentElement.classList.remove(className);
+		}
+	},
+};
+
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export function ThemeProvider({ children }: { children: ReactNode }) {
-	const [theme, setTheme] = useState<Theme>('dark'); // Initial default
+interface ThemeProviderProps {
+	children: ReactNode;
+	storage?: StorageAdapter;
+	domAdapter?: DOMAdapter;
+	defaultTheme?: Theme;
+}
+
+/**
+ * Provides theme state and controls to the component tree.
+ * On mount, reads the saved theme from storage or falls back to the user's
+ * OS preference. Writes the active theme to storage and the DOM on change.
+ * @param children - Child components that consume the theme context
+ * @param storage - Storage adapter for reading/writing the saved theme (defaults to localStorage)
+ * @param domAdapter - DOM adapter for applying/removing the dark class (defaults to document.documentElement)
+ * @param defaultTheme - Theme to use when no saved preference exists and OS preference is unavailable
+ */
+export function ThemeProvider({
+	children,
+	storage = defaultStorage,
+	domAdapter = defaultDOMAdapter,
+	defaultTheme = 'dark',
+}: ThemeProviderProps) {
+	const [theme, setTheme] = useState<Theme>(defaultTheme);
 
 	// On mount, check user's preference or saved theme
 	useEffect(() => {
-		const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-		const savedTheme = localStorage.getItem('theme') as Theme | null;
-		const initialTheme = savedTheme || (prefersDarkMode ? 'dark' : 'light');
-		setTheme(initialTheme);
-	}, []);
+		const prefersDarkMode =
+			typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches;
+		const saved = storage.getItem('theme');
+		// Guard against arbitrary strings written to localStorage by third parties
+		const validTheme: Theme | null = saved === 'light' || saved === 'dark' ? saved : null;
+		setTheme(validTheme ?? (prefersDarkMode ? 'dark' : defaultTheme));
+	}, [storage, defaultTheme]);
 
+	// Update storage and DOM when theme changes
 	useEffect(() => {
-		// Update localStorage and document class when theme changes
-		localStorage.setItem('theme', theme);
+		storage.setItem('theme', theme);
 
 		if (theme === 'dark') {
-			document.documentElement.classList.add('dark');
+			domAdapter.addClass('dark');
 		} else {
-			document.documentElement.classList.remove('dark');
+			domAdapter.removeClass('dark');
 		}
-	}, [theme]);
+	}, [theme, storage, domAdapter]);
 
 	const toggleTheme = () => {
 		setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
@@ -43,6 +98,12 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 	);
 }
 
+/**
+ * Returns the current theme and controls for toggling or setting it explicitly.
+ * Must be called within a ThemeProvider.
+ * @throws {Error} When called outside of a ThemeProvider
+ * @returns The theme context value: theme, setTheme, and toggleTheme
+ */
 export function useTheme() {
 	const context = useContext(ThemeContext);
 	if (context === undefined) {
