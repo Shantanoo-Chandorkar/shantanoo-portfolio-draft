@@ -44,7 +44,6 @@ export function CinematicHero() {
 					transition={{ duration: 0.8 }}
 					className="text-center"
 				>
-					{/* Name — delay 0ms */}
 					<motion.div
 						initial="hidden"
 						animate="visible"
@@ -58,10 +57,10 @@ export function CinematicHero() {
 							<span className="sr-only">{name}</span>
 							<span aria-hidden="true" className="flex flex-wrap justify-center">
 								{nameWords.map((word, wIndex) => (
-									<span key={wIndex} className="inline-block whitespace-nowrap break-keep mr-3">
+									<span key={word} className="inline-block whitespace-nowrap break-keep mr-3">
 										{word.split('').map((letter, lIndex) => (
 											<motion.span
-												key={lIndex}
+												key={`${word}-${lIndex}`}
 												variants={{
 													hidden: { opacity: 0, y: 20 },
 													visible: { opacity: 1, y: 0 },
@@ -79,7 +78,6 @@ export function CinematicHero() {
 							</span>
 						</h1>
 
-						{/* Title — delay 200ms */}
 						<motion.div
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
@@ -124,7 +122,6 @@ export function CinematicHero() {
 						</motion.p>
 					</motion.div>
 
-					{/* Impact Stats — delay 600ms */}
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
@@ -144,7 +141,6 @@ export function CinematicHero() {
 				</motion.div>
 			</div>
 
-			{/* Scroll to explore — delay 1000ms */}
 			<motion.button
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1 }}

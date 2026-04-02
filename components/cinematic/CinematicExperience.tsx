@@ -52,8 +52,8 @@ function CinematicExpCard({ exp, className = '' }: { exp: ExperienceEntry; class
 				<HighlightBadges highlights={exp.highlights} />
 
 				<ul className="text-muted-foreground mb-6 space-y-2 text-left">
-					{exp.description.map((item, i) => (
-						<li key={i} className="flex items-start">
+					{exp.description.map((item) => (
+						<li key={item} className="flex items-start">
 							<span className="text-primary mr-3 mt-1" aria-hidden="true">
 								•
 							</span>
