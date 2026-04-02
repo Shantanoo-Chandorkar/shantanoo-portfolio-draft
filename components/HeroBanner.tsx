@@ -2,9 +2,11 @@
 
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { MapPin } from 'lucide-react';
-import { useState, useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import Image from 'next/image';
 import { heroSocialLinks } from '@/lib/social-links';
+import { useCyclingIndex } from '@/hooks/useCyclingIndex';
+import { useOrbitRadius } from '@/hooks/useOrbitRadius';
 
 const name = 'Shantanoo Chandorkar';
 const nameWords = name.split(' '); // ["Shantanoo", "Chandorkar"]
@@ -12,29 +14,13 @@ const title = 'Software';
 const words = ['Developer', 'Engineer', 'Designer', 'Creator'];
 
 export function HeroBanner() {
-	const [currentIconIndex, setCurrentIconIndex] = useState(0);
 	const imageRef = useRef<HTMLDivElement>(null);
-	const [radius, setRadius] = useState(200);
-
 	const nameRef = useRef(null);
+
 	const isInView = useInView(nameRef, { once: true });
-
-	const [wordIndex, setWordIndex] = useState(0);
-
-	useEffect(() => {
-		const interval = setInterval(() => {
-			setWordIndex((prev) => (prev + 1) % words.length);
-		}, 5000);
-		return () => clearInterval(interval);
-	}, []);
-
-	useEffect(() => {
-		const interval = setInterval(() => {
-			setCurrentIconIndex((prev) => (prev + 1) % heroSocialLinks.length);
-		}, 10000);
-
-		return () => clearInterval(interval);
-	}, []);
+	const wordIndex = useCyclingIndex(words.length, 5000);
+	const currentIconIndex = useCyclingIndex(heroSocialLinks.length, 10000);
+	const radius = useOrbitRadius(imageRef);
 
 	const getIconPosition = (index: number, currentIndex: number, radius: number) => {
 		const totalIcons = heroSocialLinks.length;
@@ -48,23 +34,6 @@ export function HeroBanner() {
 
 		return { x, y };
 	};
-
-	useEffect(() => {
-		const updateRadius = () => {
-			if (imageRef.current) {
-				const size = imageRef.current.offsetWidth;
-				const iconSize = 48;
-				// 6% offset ensures the orbiting icons clear the profile image edge with visual breathing room
-				const offset = size * 0.06;
-				const safeRadius = (size - iconSize) / 2 + offset;
-				setRadius(safeRadius);
-			}
-		};
-
-		updateRadius();
-		window.addEventListener('resize', updateRadius);
-		return () => window.removeEventListener('resize', updateRadius);
-	}, []);
 
 	return (
 		<section className="min-h-screen flex items-center justify-center px-4 pt-20 sm:py-16">
@@ -101,10 +70,10 @@ export function HeroBanner() {
 								<span className="sr-only">{name}</span>
 								<span aria-hidden="true" className="flex flex-wrap lg:flex-nowrap">
 									{nameWords.map((word, wIndex) => (
-										<span key={wIndex} className="inline-block whitespace-nowrap break-keep mr-2">
+										<span key={word} className="inline-block whitespace-nowrap break-keep mr-2">
 											{word.split('').map((letter, lIndex) => (
 												<motion.span
-													key={lIndex}
+													key={`${word}-${lIndex}`}
 													variants={{
 														hidden: { opacity: 0, y: 20 },
 														visible: { opacity: 1, y: 0 },
