@@ -43,3 +43,6 @@ docs/
 
 # lock files
 package-lock.json
+
+# code review output
+shantanoo-portfolio-review-p2/

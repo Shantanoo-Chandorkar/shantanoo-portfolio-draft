@@ -55,6 +55,7 @@ npm run lint         # Run ESLint (next lint)
 ## Gotchas
 
 <!-- Update these as you discover project-specific issues -->
+
 - `package-lock.json` is gitignored -- dependency versions may drift
 - The project uses `@next/swc-wasm-nodejs` as a dependency (WASM fallback for SWC)
 - ESLint extends `next/core-web-vitals` only -- no additional rules configured
