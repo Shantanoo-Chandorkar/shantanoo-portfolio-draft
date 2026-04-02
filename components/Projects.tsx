@@ -1,16 +1,15 @@
 'use client';
 
-import { motion, useMotionValue, useTransform, PanInfo, AnimatePresence } from 'framer-motion';
+import { motion, useMotionValue, useTransform, PanInfo } from 'framer-motion';
 import { useState } from 'react';
 import { useModal } from '@/hooks/useModal';
-import { ExternalLink, X } from 'lucide-react';
-import { FaGithub } from 'react-icons/fa';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useTheme } from '@/contexts/ThemeContext';
 import Image from 'next/image';
 import { SectionHeader } from './SectionHeader';
 import { TechBadge } from './TechBadge';
+import { ProjectModal } from './ProjectModal';
 import { VIEWPORT_ONCE } from '@/lib/animation';
 import type { Project } from '@/lib/types';
 import { projects } from '@/lib/data/projects';
@@ -155,104 +154,7 @@ export function Projects() {
 					</div>
 				</div>
 
-				{/* Project Modal */}
-				<AnimatePresence>
-					{selectedProject && (
-						<motion.div
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							exit={{ opacity: 0 }}
-							className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-							onClick={closeProject}
-						>
-							<motion.div
-								role="dialog"
-								aria-modal="true"
-								aria-labelledby="modal-title"
-								initial={{ scale: 0.9, opacity: 0 }}
-								animate={{ scale: 1, opacity: 1 }}
-								exit={{ scale: 0.9, opacity: 0 }}
-								className="bg-card rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto border border-border scrollbar-thin scrollbar-thumb-primary/30 relative"
-								onClick={(e) => e.stopPropagation()}
-							>
-								<div className="relative">
-									<Image
-										src={selectedProject.image}
-										alt={selectedProject.title}
-										className="w-full h-64 object-cover rounded-t-lg"
-										width={600}
-										height={500}
-									/>
-									<Button
-										variant="ghost"
-										size="sm"
-										aria-label="Close modal"
-										className="absolute top-4 right-4 bg-background/50 text-foreground hover:bg-background/70"
-										onClick={closeProject}
-									>
-										<X className="w-4 h-4" />
-									</Button>
-								</div>
-
-								<div className="p-6">
-									<h3 id="modal-title" className="text-2xl font-bold text-foreground mb-4">
-										{selectedProject.title}
-									</h3>
-									<p className="text-muted-foreground mb-6">{selectedProject.longDescription}</p>
-
-									<div className="mb-6">
-										<h4 className="text-lg font-semibold text-foreground mb-3">Key Features</h4>
-										<ul className="space-y-2">
-											{selectedProject.features.map((feature, i) => (
-												<li key={i} className="flex items-start text-muted-foreground">
-													<span className="text-primary mr-3 mt-1" aria-hidden="true">
-														•
-													</span>
-													<span>{feature}</span>
-												</li>
-											))}
-										</ul>
-									</div>
-
-									<div className="mb-6">
-										<h4 className="text-lg font-semibold text-foreground mb-3">Technologies Used</h4>
-										<div className="flex flex-wrap gap-2">
-											{selectedProject.technologies.map((tech) => (
-												<TechBadge key={tech} tech={tech} />
-											))}
-										</div>
-									</div>
-
-									<div className="flex flex-row max-sm:flex-col sm:flex-row gap-4">
-										<Button asChild className="bg-primary hover:bg-primary/90">
-											<a href={selectedProject.githubUrl} target="_blank" rel="noopener noreferrer">
-												<FaGithub className="w-4 h-4 mr-2" />
-												<span className="text-xs">View Code</span>
-											</a>
-										</Button>
-										{selectedProject.liveUrl ? (
-											<Button
-												variant="outline"
-												asChild
-												className="border-primary text-primary hover:bg-primary/10"
-											>
-												<a href={selectedProject.liveUrl} target="_blank" rel="noopener noreferrer">
-													<ExternalLink className="w-4 h-4 mr-2" />
-													<span className="text-xs">Live Demo</span>
-												</a>
-											</Button>
-										) : (
-											<Button variant="outline" disabled className="border-primary text-primary opacity-50">
-												<ExternalLink className="w-4 h-4 mr-2" />
-												<span className="text-xs">No Live Demo</span>
-											</Button>
-										)}
-									</div>
-								</div>
-							</motion.div>
-						</motion.div>
-					)}
-				</AnimatePresence>
+				<ProjectModal project={selectedProject} onClose={closeProject} />
 			</div>
 		</section>
 	);
