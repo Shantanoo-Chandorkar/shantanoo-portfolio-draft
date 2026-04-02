@@ -1,5 +1,9 @@
 # Shantanoo Portfolio
 
+> This project inherits all rules from the global Claude configuration at
+> `~/.claude/CLAUDE.md`. Everything defined there applies here in full.
+> Only project-specific context is documented below.
+
 Personal portfolio website built with Next.js and Tailwind CSS.
 
 ## Tech Stack
