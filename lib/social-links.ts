@@ -2,10 +2,13 @@ import { FaLinkedin, FaGithub, FaHackerrank } from 'react-icons/fa';
 import { SiLeetcode, SiGeeksforgeeks } from 'react-icons/si';
 import { Github, Linkedin } from 'lucide-react';
 
+const GITHUB_URL = 'https://github.com/Shantanoo-Chandorkar';
+const LINKEDIN_URL = 'https://linkedin.com/in/shantanoo-chandorkar';
+
 export const heroSocialLinks = [
 	{
 		icon: FaGithub,
-		href: 'https://github.com/Shantanoo-Chandorkar',
+		href: GITHUB_URL,
 		label: 'GitHub',
 		color: '#AAA',
 	},
@@ -17,7 +20,7 @@ export const heroSocialLinks = [
 	},
 	{
 		icon: FaLinkedin,
-		href: 'https://linkedin.com/in/shantanoo-chandorkar',
+		href: LINKEDIN_URL,
 		label: 'LinkedIn',
 		color: '#0077B5',
 	},
@@ -39,13 +42,13 @@ export const contactSocialLinks = [
 	{
 		icon: Github,
 		label: 'GitHub',
-		href: 'https://github.com/Shantanoo-Chandorkar',
+		href: GITHUB_URL,
 		color: 'hover:text-gray-400',
 	},
 	{
 		icon: Linkedin,
 		label: 'LinkedIn',
-		href: 'https://linkedin.com/in/shantanoo-chandorkar',
+		href: LINKEDIN_URL,
 		color: 'hover:text-blue-400',
 	},
 ];
