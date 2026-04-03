@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ExternalLink, X } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
@@ -21,6 +22,14 @@ interface ProjectModalProps {
  * @param onClose - Callback invoked when the user dismisses the modal
  */
 export function ProjectModal({ project, onClose }: ProjectModalProps) {
+	useEffect(() => {
+		if (!project) return;
+		// Prevent the page from scrolling behind the open modal.
+		document.body.style.overflow = 'hidden';
+		return () => {
+			document.body.style.overflow = '';
+		};
+	}, [project]);
 	return (
 		<AnimatePresence>
 			{project && (
@@ -32,6 +41,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 					onClick={onClose}
 				>
 					<motion.div
+						data-lenis-prevent
 						role="dialog"
 						aria-modal="true"
 						aria-labelledby="modal-title"
