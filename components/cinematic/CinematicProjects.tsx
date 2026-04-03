@@ -39,7 +39,7 @@ function StickyCard({ project, i, progress, range, targetScale, onClick }: Stick
 	const scale = useTransform(progress, range, [1, targetScale]);
 
 	return (
-		<div className="sticky top-0 flex items-center justify-center sm:h-screen">
+		<div className="sticky top-0 flex items-start justify-center sm:h-screen sm:pt-20">
 			<motion.div
 				style={{
 					scale,
@@ -47,16 +47,16 @@ function StickyCard({ project, i, progress, range, targetScale, onClick }: Stick
 					// while keeping all cards near the viewport center.
 					top: `${i * 20}px`,
 				}}
-				className="relative origin-top w-[85%] rounded-2xl overflow-hidden bg-card border border-border shadow-2xl cursor-pointer flex flex-col"
+				className="relative origin-top w-[85%] h-full rounded-2xl overflow-hidden bg-card border border-border shadow-2xl cursor-pointer flex flex-col"
 				onClick={() => onClick(project)}
 			>
-				<div className="relative h-52 shrink-0">
+				<div className="relative h-[50%] shrink-0">
 					<Image
 						src={project.image}
 						alt={project.title}
 						className="w-full h-full object-cover"
 						width={680}
-						height={208}
+						height={300}
 					/>
 				</div>
 
