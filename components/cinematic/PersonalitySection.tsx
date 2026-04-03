@@ -31,7 +31,8 @@ const personalityItems: PersonalityItem[] = [
 
 /**
  * Personality Section component for the cinematic contact section.
- * Displays expandable personality trait buttons with descriptions.
+ * Displays personality trait buttons with a fixed description area below
+ * that updates on selection — no layout shift on toggle.
  */
 export function PersonalitySection() {
 	const [expandedPersonality, setExpandedPersonality] = useState<string | null>(null);
@@ -47,34 +48,35 @@ export function PersonalitySection() {
 			<h3 className="text-xl font-bold text-foreground mb-4">Beyond the Code</h3>
 			<div className="flex flex-wrap gap-3">
 				{personalityItems.map((item) => (
-					<div key={item.label}>
-						<button
-							onClick={() =>
-								setExpandedPersonality(expandedPersonality === item.label ? null : item.label)
-							}
-							className={`flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-200 cursor-pointer ${
-								expandedPersonality === item.label
-									? 'bg-primary/10 border-primary/30 text-primary'
-									: 'bg-card/50 border-border text-muted-foreground hover:bg-card/70'
-							}`}
-						>
-							<item.icon className="w-4 h-4" />
-							<span className="text-sm font-medium">{item.label}</span>
-						</button>
-						<AnimatePresence>
-							{expandedPersonality === item.label && (
-								<motion.p
-									initial={{ opacity: 0, height: 0 }}
-									animate={{ opacity: 1, height: 'auto' }}
-									exit={{ opacity: 0, height: 0 }}
-									className="text-sm text-muted-foreground mt-2 px-4 overflow-hidden"
-								>
-									{item.description}
-								</motion.p>
-							)}
-						</AnimatePresence>
-					</div>
+					<button
+						key={item.label}
+						onClick={() => setExpandedPersonality(expandedPersonality === item.label ? null : item.label)}
+						className={`flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-200 cursor-pointer ${
+							expandedPersonality === item.label
+								? 'bg-primary/10 border-primary/30 text-primary'
+								: 'bg-card/50 border-border text-muted-foreground hover:bg-card/70'
+						}`}
+					>
+						<item.icon className="w-4 h-4" />
+						<span className="text-sm font-medium">{item.label}</span>
+					</button>
 				))}
+			</div>
+			<div className="h-10 mt-3">
+				<AnimatePresence mode="wait">
+					{expandedPersonality && (
+						<motion.p
+							key={expandedPersonality}
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							exit={{ opacity: 0 }}
+							transition={{ duration: 0.15 }}
+							className="text-sm text-muted-foreground"
+						>
+							{personalityItems.find((i) => i.label === expandedPersonality)?.description}
+						</motion.p>
+					)}
+				</AnimatePresence>
 			</div>
 		</motion.div>
 	);
