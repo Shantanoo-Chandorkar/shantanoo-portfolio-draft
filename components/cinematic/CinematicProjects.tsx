@@ -47,7 +47,7 @@ function StickyCard({ project, i, progress, range, targetScale, onClick }: Stick
 					// while keeping all cards near the viewport center.
 					top: `${i * 20}px`,
 				}}
-				className="relative origin-top w-[85%] h-[70%] rounded-2xl overflow-hidden bg-card border border-border shadow-2xl cursor-pointer flex flex-col"
+				className="relative origin-top w-[85%] rounded-2xl overflow-hidden bg-card border border-border shadow-2xl cursor-pointer flex flex-col"
 				onClick={() => onClick(project)}
 			>
 				<div className="relative h-52 shrink-0">
@@ -60,13 +60,15 @@ function StickyCard({ project, i, progress, range, targetScale, onClick }: Stick
 					/>
 				</div>
 
-				<div className="flex-1 p-5 flex flex-col gap-3 overflow-hidden">
+				<div className="flex-1 p-5 flex flex-col gap-3 sm:gap-4 overflow-hidden">
 					<h3 className="text-xl font-bold text-foreground">{project.title}</h3>
 					<p className="text-muted-foreground text-sm line-clamp-2">{project.description}</p>
 
-					<div className="flex-1 flex flex-col gap-2 min-h-0">
-						<p className="text-muted-foreground text-xs uppercase tracking-wider">Technologies</p>
-						<div className="flex flex-wrap gap-1.5 content-start overflow-hidden">
+					<div className="flex-1 flex flex-col gap-3 min-h-0">
+						<p className="text-muted-foreground text-xs font-bold uppercase tracking-wider">
+							Technologies:
+						</p>
+						<div className="flex flex-wrap gap-3 content-start overflow-hidden">
 							{project.technologies.map((tech) => (
 								<TechBadge key={tech} tech={tech} />
 							))}
