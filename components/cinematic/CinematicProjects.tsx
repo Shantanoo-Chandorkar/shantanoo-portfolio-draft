@@ -39,7 +39,7 @@ function StickyCard({ project, i, progress, range, targetScale, onClick }: Stick
 	const scale = useTransform(progress, range, [1, targetScale]);
 
 	return (
-		<div className="sticky top-0 flex items-start justify-center sm:h-screen sm:pt-20">
+		<div className="sticky top-0 flex items-start justify-center sm:h-screen pt-20">
 			<motion.div
 				style={{
 					scale,
