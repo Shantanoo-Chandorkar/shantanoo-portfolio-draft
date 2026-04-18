@@ -73,4 +73,34 @@ export const projects: Project[] = [
 			'Light Mode',
 		],
 	},
+	{
+		id: 4,
+		title: 'WebhookBin',
+		description:
+			'A self-hosted webhook inspection tool to capture, inspect, and replay HTTP requests in real time.',
+		longDescription:
+			'A self-hosted webhook inspection platform that generates unique endpoint URLs, streams every incoming HTTP request to the dashboard via Server-Sent Events, and lets you inspect headers, query parameters, and JSON-formatted bodies. Captured requests can be replayed to any target URL or exported as JSON files. Includes per-IP rate limiting and automatic 24-hour endpoint expiry.',
+		technologies: [
+			'Next.js',
+			'React',
+			'TypeScript',
+			'Tailwind CSS',
+			'Shadcn',
+			'MongoDB',
+			'Redis',
+			'Server-Sent Events',
+		],
+		image: '/webhookbin.png',
+		githubUrl: 'https://github.com/Shantanoo-Chandorkar/webhook-platform',
+		liveUrl: 'https://webhookbin-theta.vercel.app/',
+		features: [
+			'Unique Endpoint Generation',
+			'Real-Time SSE Streaming',
+			'Request Inspection',
+			'Request Replay',
+			'JSON Export',
+			'Rate Limiting',
+			'Auto-Expiring Endpoints',
+		],
+	},
 ];
