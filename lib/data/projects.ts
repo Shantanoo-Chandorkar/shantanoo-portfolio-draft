@@ -34,6 +34,33 @@ export const projects: Project[] = [
 			'Lazy Loading',
 		],
 	},
+	{
+		id: 2,
+		title: 'Edge OG Social Card Generator',
+		description:
+			'An enterprise-grade, high-performance dynamic image generation engine built with Next.js, Satori, and Resvg-WASM.',
+		longDescription:
+			'A specialized microservice (integrated into Next.js) that transforms React components into high-quality PNG images for social media sharing. It leverages a lightweight, WASM-based pipeline to generate images directly on the Vercel Edge Network or Serverless functions.',
+		technologies: [
+			'Next.js',
+			'Satori',
+			'Resvg-WASM',
+			'React',
+			'TypeScript',
+			'Tailwind CSS',
+			'Upstash Redis',
+		],
+		image: '/edge-og.png',
+		githubUrl: 'https://github.com/Shantanoo-Chandorkar/edge-og',
+		liveUrl: 'https://edge-og-xi.vercel.app/',
+		features: [
+			'Edge-native Rendering',
+			'Template Registry',
+			'Live Playground',
+			'OG Inspector Tool',
+			'Two-Layer Caching',
+		],
+	},
 	// {
 	// 	id: 2,
 	// 	title: 'Habit Tracker',
@@ -55,7 +82,7 @@ export const projects: Project[] = [
 	// 	],
 	// },
 	{
-		id: 2,
+		id: 3,
 		title: 'WebhookBin',
 		description:
 			'A self-hosted webhook inspection tool to capture, inspect, and replay HTTP requests in real time.',
@@ -85,7 +112,7 @@ export const projects: Project[] = [
 		],
 	},
 	{
-		id: 3,
+		id: 4,
 		title: 'Task Tracker',
 		description:
 			'A single-user task management app with unlimited nested subtasks, inspired by ClickUp and Linear.',
@@ -119,7 +146,7 @@ export const projects: Project[] = [
 		],
 	},
 	{
-		id: 4,
+		id: 5,
 		title: 'Portfolio Project',
 		description: 'Portfolio project showcasing frontend skills with intuitive UI and animations',
 		longDescription:
