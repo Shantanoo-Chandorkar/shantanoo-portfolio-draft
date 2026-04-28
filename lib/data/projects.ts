@@ -113,6 +113,29 @@ export const projects: Project[] = [
 	},
 	{
 		id: 4,
+		title: 'TypeForge',
+		description:
+			'A minimalist, keyboard-first typing speed test with real-time WPM tracking, per-key error analytics, and a keyboard heatmap.',
+		longDescription:
+			'A browser-only typing speed test with no accounts or servers. Tracks real-time WPM, raw WPM, accuracy, error count, and consistency score across 6 content modes (quotes, words, punctuation, code, academic, custom). An analytics dashboard shows a WPM trend chart, personal bests by difficulty and timer, and a keyboard heatmap that surfaces your weakest keys with targeted drill recommendations. All data persists in localStorage.',
+		technologies: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Recharts'],
+		image: '/type-forge.png',
+		githubUrl: 'https://github.com/Shantanoo-Chandorkar/type-forge',
+		liveUrl: 'https://type-forge-iota.vercel.app/',
+		features: [
+			'Real-Time WPM Tracking',
+			'6 Content Modes',
+			'4 Timer Lengths',
+			'3 Difficulty Levels',
+			'Analytics Dashboard',
+			'Keyboard Heatmap',
+			'Weakness Drill Recommendations',
+			'Dark / Light Theme',
+			'Configurable Fonts',
+		],
+	},
+	{
+		id: 5,
 		title: 'Task Tracker',
 		description:
 			'A single-user task management app with unlimited nested subtasks, inspired by ClickUp and Linear.',
@@ -146,7 +169,7 @@ export const projects: Project[] = [
 		],
 	},
 	{
-		id: 5,
+		id: 6,
 		title: 'Portfolio Project',
 		description: 'Portfolio project showcasing frontend skills with intuitive UI and animations',
 		longDescription:
