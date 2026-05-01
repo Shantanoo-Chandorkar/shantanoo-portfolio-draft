@@ -136,6 +136,38 @@ export const projects: Project[] = [
 	},
 	{
 		id: 5,
+		title: 'PulseOps',
+		description: 'A self-hosted HTTP uptime monitor with incident tracking, alerts, and a public status page.',
+		longDescription:
+			'A self-hosted uptime monitoring platform that lets you add HTTP monitors with configurable method, interval, keyword assertions, and expected status codes. Health checks run automatically via GitHub Actions every 5 minutes. Incidents open on two consecutive failures and auto-resolve on recovery. Supports email and webhook alerts, 30-day response time history with charts, and a public status page shareable without authentication.',
+		technologies: [
+			'Next.js',
+			'React',
+			'TypeScript',
+			'Tailwind CSS',
+			'MongoDB',
+			'Mongoose',
+			'NextAuth',
+			'Resend',
+			'Recharts',
+			'GitHub Actions',
+		],
+		image: '/pulse-ops.png',
+		githubUrl: 'https://github.com/Shantanoo-Chandorkar/pulse-ops',
+		liveUrl: 'https://pulse-ops-teal.vercel.app/',
+		features: [
+			'HTTP Monitor Configuration',
+			'Automated Health Checks',
+			'Incident Tracking',
+			'Email & Webhook Alerts',
+			'Response Time Charts',
+			'Public Status Page',
+			'Manual Incident Resolution',
+			'Google OAuth & Magic Link Auth',
+		],
+	},
+	{
+		id: 6,
 		title: 'Task Tracker',
 		description:
 			'A single-user task management app with unlimited nested subtasks, inspired by ClickUp and Linear.',
@@ -169,7 +201,7 @@ export const projects: Project[] = [
 		],
 	},
 	{
-		id: 6,
+		id: 7,
 		title: 'Portfolio Project',
 		description: 'Portfolio project showcasing frontend skills with intuitive UI and animations',
 		longDescription:
