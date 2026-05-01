@@ -137,7 +137,8 @@ export const projects: Project[] = [
 	{
 		id: 5,
 		title: 'PulseOps',
-		description: 'A self-hosted HTTP uptime monitor with incident tracking, alerts, and a public status page.',
+		description:
+			'A self-hosted HTTP uptime monitor with incident tracking, alerts, and a public status page.',
 		longDescription:
 			'A self-hosted uptime monitoring platform that lets you add HTTP monitors with configurable method, interval, keyword assertions, and expected status codes. Health checks run automatically via GitHub Actions every 5 minutes. Incidents open on two consecutive failures and auto-resolve on recovery. Supports email and webhook alerts, 30-day response time history with charts, and a public status page shareable without authentication.',
 		technologies: [
