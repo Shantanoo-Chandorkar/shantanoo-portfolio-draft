@@ -58,6 +58,14 @@ function StickyCard({ project, i, progress, range, targetScale, onClick }: Stick
 						width={680}
 						height={300}
 					/>
+					{project.inProgress && (
+						<span
+							className="absolute top-3 left-3 text-xs font-medium px-2 py-1 rounded-full bg-amber-900 text-gray-200 dark:text-gray-200 border
+  border-amber-500/40 backdrop-blur-sm"
+						>
+							In Progress
+						</span>
+					)}
 				</div>
 
 				<div className="flex-1 p-5 flex flex-col gap-3 sm:gap-4 overflow-hidden">

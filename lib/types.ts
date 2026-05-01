@@ -8,6 +8,7 @@ export interface Project {
 	githubUrl: string;
 	liveUrl: string;
 	features: string[];
+	inProgress?: boolean;
 }
 
 export interface Highlight {

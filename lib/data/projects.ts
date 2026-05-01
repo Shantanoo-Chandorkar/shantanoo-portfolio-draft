@@ -156,6 +156,7 @@ export const projects: Project[] = [
 		image: '/pulse-ops.png',
 		githubUrl: 'https://github.com/Shantanoo-Chandorkar/pulse-ops',
 		liveUrl: 'https://pulse-ops-teal.vercel.app/',
+		inProgress: true,
 		features: [
 			'HTTP Monitor Configuration',
 			'Automated Health Checks',
@@ -190,6 +191,7 @@ export const projects: Project[] = [
 		image: '/tasktracker.png',
 		githubUrl: 'https://github.com/Shantanoo-Chandorkar/task-tracker',
 		liveUrl: 'https://task-tracker-ashy-one.vercel.app/',
+		inProgress: true,
 		features: [
 			'Infinite Nesting',
 			'Status Groups',

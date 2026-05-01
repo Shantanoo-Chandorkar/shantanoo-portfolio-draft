@@ -52,7 +52,7 @@ function ProjectCard({ project, index, totalCards, onDragEnd, onClick }: Project
 		>
 			<Card className="w-full h-full bg-card/50 border-border backdrop-blur-sm cursor-grab active:cursor-grabbing">
 				<CardContent className="p-0 h-full flex flex-col">
-					<div className="h-48 overflow-hidden rounded-t-lg">
+					<div className="relative h-48 overflow-hidden rounded-t-lg">
 						<Image
 							src={project.image}
 							alt={project.title}
@@ -60,6 +60,11 @@ function ProjectCard({ project, index, totalCards, onDragEnd, onClick }: Project
 							width={600}
 							height={500}
 						/>
+						{project.inProgress && (
+							<span className="absolute top-3 left-3 text-xs font-medium px-2 py-1 rounded-full bg-amber-900 text-gray-200 dark:text-gray-200 border border-amber-500/40 backdrop-blur-sm">
+								In Progress
+							</span>
+						)}
 					</div>
 					<div className="p-6 flex flex-col justify-between flex-grow">
 						<div>

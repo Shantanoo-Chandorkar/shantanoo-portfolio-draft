@@ -59,6 +59,11 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 								width={600}
 								height={500}
 							/>
+							{project.inProgress && (
+								<span className="absolute top-4 left-4 text-xs font-medium px-2 py-1 rounded-full bg-amber-900 text-gray-200 dark:text-gray-200 border border-amber-500/40 backdrop-blur-sm">
+									In Progress
+								</span>
+							)}
 							<Button
 								variant="ghost"
 								size="sm"
